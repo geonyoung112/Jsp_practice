@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\Users\L5A\Desktop\Servlet\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2394087374.index
+\lcomputerstudy\src\main\java
+C:\Users\L5A\Desktop\Servlet\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2738845986.index
+\lcomputerstudy\src\main\java
+C:\Users\L5A\Desktop\Servlet\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\469339617.index
+\lcomputerstudy\src\main\java
