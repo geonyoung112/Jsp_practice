@@ -52,3 +52,10 @@
 0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:18:11 +0900] "GET /lcomputerstudy/user-list.do HTTP/1.1" 500 1568
 0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:19:03 +0900] "GET /lcomputerstudy/user-list.do HTTP/1.1" 500 1568
 0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:19:32 +0900] "GET /lcomputerstudy/user-list.do HTTP/1.1" 200 1563
+127.0.0.1 - - [11/Apr/2023:11:27:45 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:27:46 +0900] "GET /lcomputerstudy/user/list.jsp HTTP/1.1" 200 521
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:28:02 +0900] "GET /lcomputerstudy/user/user-insert.do HTTP/1.1" 404 809
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:28:14 +0900] "GET /lcomputerstudy/user-insert.do HTTP/1.1" 200 755
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:28:30 +0900] "POST /lcomputerstudy/user-insert-process.do HTTP/1.1" 200 203
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:28:43 +0900] "POST /lcomputerstudy/user-insert-process.do HTTP/1.1" 200 203
+0:0:0:0:0:0:0:1 - - [11/Apr/2023:11:28:59 +0900] "GET /lcomputerstudy/user-list.do HTTP/1.1" 200 1735
