@@ -17,8 +17,8 @@ public class UserService2 {
 		dao.insertUser(user);
 	}                    
 	
-	public User2 detailUser(int u_idx) {
-		return dao.detailUser(u_idx);
+	public void detailUser(int u_idx) {
+		dao.detailUser(u_idx);
 	}
 
 	public static UserService2 getInstance() {
