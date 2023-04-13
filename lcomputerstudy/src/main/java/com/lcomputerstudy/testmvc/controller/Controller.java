@@ -33,13 +33,15 @@ public class Controller extends HttpServlet {
 		switch (command) {
 			case "/list.do":
 				UserService2 userService = UserService2.getInstance();
-				ArrayList<User2> list2 = userService.getUsers();
+				ArrayList<User2> list= userService.getUsers();
 				view = "test2/userlist";
-				request.setAttribute("list2", list2);
+				request.setAttribute("list", list);
 				break;
+				
 			case "/newjoin.do":
 				view = "test2/Newjoin";
 				break;
+				
 			case "/joinresult.do":
 				User2 user = new User2();
 				user.setU_id(request.getParameter("id"));
@@ -55,19 +57,13 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/detail.do":
-				int u_idx = Integer.parseInt(request.getParameter("u_idx"));
-				request.setAttribute("u_idx", u_idx);
-				view = "test2/userDetail";
-				break;
-				
-			case "/delete.do":
-	                int u_idx2 = Integer.parseInt(request.getParameter("u_idx"));
-	                userService = UserService2.getInstance();
-	                User2 user2 = new User2();
-	                user2.setU_idx(u_idx2);
-	                userService.deleteUser(user2);
-	                view = "test2/userDelete";
-	                break;
+			    int u_idx = Integer.parseInt(request.getParameter("u_idx"));
+			    userService = UserService2.getInstance();
+			    User2 user2 = userService.detailUser(u_idx);
+			    view = "test2/userDetail";
+			    request.setAttribute("user", user2);
+			    break;
+			
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");

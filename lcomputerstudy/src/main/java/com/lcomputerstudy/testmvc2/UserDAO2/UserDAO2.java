@@ -88,20 +88,6 @@ public class UserDAO2 {
 		}
 	}
 	
-	public void deleteUser(User2 user) {
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
-	    try {
-	        conn = DBConnection2.getConnection();
-	        String sql = "DELETE FROM user WHERE u_idx=?";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, user.getU_idx());
-	        pstmt.executeUpdate();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } 
-	}
-	
 	public User2 detailUser(int u_idx) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -110,12 +96,12 @@ public class UserDAO2 {
 
 			try {
 				conn = DBConnection2.getConnection();
-				String query = "select * from user where u_idx=?";
-				pstmt = conn.prepareStatement(query);
+				String sql = "select * from user where u_idx=?";
+				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, u_idx);
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
+				while(rs.next()) {
 					user = new User2();
 					user.setU_idx(rs.getInt("u_idx"));
 		   	       	user.setU_id(rs.getString("u_id"));
@@ -125,7 +111,18 @@ public class UserDAO2 {
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
-			} 
-			return user;
-		}
+			} finally {
+
+					try {
+						rs.close();
+						pstmt.close();
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				return user;
+			}
 }
+	

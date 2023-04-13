@@ -7,13 +7,23 @@
 <title>회원 삭제</title>
 </head>
 <body>
-	<h1>회원 삭제</h1>
-	<form action="delete.do" name="user" method="post">
-		<label>삭제할 회원 번호:</label>
-		<input type="text" name="u_idx"><br>
-		<input type="submit" value="삭제">
-	</form>
-	<a href="/lcomputerstudy/list.do">회원 목록으로 돌아가기</a>
-</body>
+<%@ include file="db_connection.jsp" %>
+
+<%
+	String idx = request.getParameter("u_idx");
+	System.out.println(idx);
+	
+	PreparedStatement pstmt = null;
+
+    String query = "delete from user where u_idx=?";
+   	pstmt = conn.prepareStatement(query);
+   	pstmt.setString(1, idx);
+   	pstmt.executeUpdate();
+%>
+	<h2>삭제 완료</h2>
+<script>
+setTimeout(function () {
+	window.location.href = "userlist.jsp";
+</script>
 </body>
 </html>

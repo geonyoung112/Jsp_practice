@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +6,7 @@
 <meta charset="UTF-8">
 <title>회원 목록</title>
 
-<Style>
+<style>
 	table {
 		borde-collapse:collapse;
 	}
@@ -21,10 +20,10 @@
 	}
 	a {
 		text-decoration:none;
-		color:#0000;
+		color:#000;
 		font-weight:700;
 	}
-</Style>
+</style>
 </head>
 
 <body>
@@ -35,12 +34,15 @@
 			<th>ID</th>
 			<th>이름</th>
 		</tr>
-		<c:forEach items="${list2}" var = "item">
-				<td>${item.u_idx}</td>
-				<td>${item.u_id}</td>
-				<td>${item.u_name}</td>
-		     <tr>
+		
+		<c:forEach items="${list}" var="user">
+			<tr>
+		       <td><a href="detail.do?u_idx=${user.u_idx}">${user.u_idx}</a></td>
+				<td>${user.u_id}</td>
+				<td>${user.u_name}</td>
+		     </tr>
 		</c:forEach>
+	
 	</table>
 </body>
 </html>

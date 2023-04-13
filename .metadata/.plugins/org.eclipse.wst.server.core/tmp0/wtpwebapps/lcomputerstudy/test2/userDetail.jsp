@@ -1,47 +1,73 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 상세 정보</title>
+<title>회원 상세</title>
+<style>
+	table {
+		border-collapse:collapse;
+	}
+	table tr th {
+		font-weight:700;
+	}
+	table tr td, table tr th {
+		border:1px solid #818181;
+		width:200px;
+		text-align:center;
+	}
+	a {
+		text-decoration:none;
+		color:#000;
+		font-weight:700;
+	}
+	a {
+		text-decoration:none;
+		color:#000;
+		font-weight:700;
+		border:none;
+		cursor:pointer;
+		padding:10px;
+		display:inline-block;
+	}
+</style>
+
 </head>
 <body>
-	<h1>회원 상세 정보</h1>
-	<table>
-		<%
-			String u_idx = request.getParameter("u_idx");
-
-			User user = UserService2.getInstance().getUser(Integer.parseInt(u_idx));
-		%>
-		<tr>
-			<td>회원 번호</td>
-			<td><%= user.getU_idx() %></td>		
-		</tr>
-		<tr>
-			<td>회원 ID</td>
-			<td><%= user.getU_id() %></td>		
-		</tr>
-		<tr>
-			<td>회원 이름</td>
-			<td><%= user.getU_name() %></td>		
-		</tr>
-		<tr>
-			<td>회원 전화번호</td>
-			<td><%= user.getU_tel() %></td>		
-		</tr>
-		<tr>
-			<td>회원 나이</td>
-			<td><%= user.getU_age() %></td>		
-		</tr>
-		<tr>
-			<td colspan="2">
-				<a href="list.do" style="font-weight:700;background-color:#818181;color:#fff;padding:10px;display:inline-block;">목록</a>
-				<a href="edit.do?u_idx=<%= user.getU_idx() %>" style="font-weight:700;background-color:#818181;color:#fff;padding:10px;display:inline-block;">수정</a>
-				<a href="delete.do?u_idx=<%= user.getU_idx() %>" style="font-weight:700;background-color:red;color:#fff;padding:10px;display:inline-block;">삭제</a>
-			</td>
-		</tr>
-	</table>
+	<h1>회원 상세페이지</h1>
+	<c:forEach items="${u_idx}" var = "user">
+		<table>
+			<tr>
+				<td>회원 번호</td>
+				<td>${user.u_idx}</td>		
+			</tr>
+			<tr>
+				<td>회원 ID</td>
+				<td>${user.u_id}</td>		
+			</tr>
+			<tr>
+				<td>회원 이름</td>
+				<td>${user.u_name}</td>		
+			</tr>
+			<tr>
+				<td>회원 전화번호</td>
+				<td>${user.u_tel}</td>		
+			</tr>
+			<tr>
+				<td>회원 나이</td>
+				<td>${user.u_age}</td>		
+			</tr>
+			
+			<tr style="height:50px;">
+				<td style="border:none;">
+					<a href="userEdit.jsp?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:#818181;color:#fff;" >수정</a>
+				</td>
+				<td style="border:none;">
+					<a href="userDelete.jsp?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:red;color:#fff;">삭제</a>
+				</td>
+			</tr>
+		</table>
+	</c:forEach>
 </body>
-
 </html>
