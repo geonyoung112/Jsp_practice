@@ -63,6 +63,7 @@ public class Controller extends HttpServlet {
 			    view = "test2/userDetail";
 			    request.setAttribute("user", user2);
 			    break;
+			
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");
