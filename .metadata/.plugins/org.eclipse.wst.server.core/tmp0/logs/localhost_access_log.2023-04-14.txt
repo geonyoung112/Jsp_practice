@@ -92,3 +92,7 @@
 0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:52:02 +0900] "POST /lcomputerstudy/edit.do HTTP/1.1" 200 922
 0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:53:13 +0900] "POST /lcomputerstudy/edit.do HTTP/1.1" 200 922
 0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:53:20 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2388
+127.0.0.1 - - [14/Apr/2023:11:57:17 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:57:21 +0900] "GET /lcomputerstudy/detail.do?u_idx=7 HTTP/1.1" 200 1316
+0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:57:22 +0900] "GET /lcomputerstudy/edit.do?u_idx=7 HTTP/1.1" 200 926
+0:0:0:0:0:0:0:1 - - [14/Apr/2023:11:57:33 +0900] "GET /lcomputerstudy/edit.do?u_idx=7 HTTP/1.1" 200 925
