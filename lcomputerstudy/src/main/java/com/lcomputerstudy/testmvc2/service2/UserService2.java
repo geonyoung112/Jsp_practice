@@ -20,6 +20,14 @@ public class UserService2 {
 	public User2 detailUser(int u_idx) {
 		return dao.detailUser(u_idx);
 	}
+	
+	public User2 editUser(int u_idx2) {
+		return dao.detailUser(u_idx2);
+	}
+	
+	public void editprocess(User2 user4) {
+		dao.editProcess(user4);
+	}
 
 	public static UserService2 getInstance() {
 		if(service == null) {
@@ -33,4 +41,6 @@ public class UserService2 {
 	public ArrayList<User2> getUsers() {
 		return dao.getUsers();
 	}
+
+
 }

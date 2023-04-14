@@ -16,3 +16,5 @@
 1681267533867	Move 'userDetail.jsp' to 'test2'
 1681345083360	Move 'userEdit.jsp' to 'test2'
 1681345410202	Move 'editProcess.jsp' to 'test2'
+1681440546526	Move 'userDelete.jsp' to 'WEB-INF'
+1681440554673	Move 'userDelete.jsp' to 'test2'

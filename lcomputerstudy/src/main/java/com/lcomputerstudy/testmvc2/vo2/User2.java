@@ -7,7 +7,14 @@ public class User2 {
 	private String u_name;
 	private String u_tel;
 	private String u_age;
-	
+	private String[] u_tels;
+
+	public String[] getU_tels() {
+		return u_tels;
+	}
+	public void setU_tels(String[] u_tels) {
+		this.u_tels = u_tels;
+	}
 	public int getU_idx() {
 		return u_idx;
 	}

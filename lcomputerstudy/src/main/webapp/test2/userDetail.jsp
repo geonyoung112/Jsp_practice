@@ -36,7 +36,7 @@
 </head>
 <body>
 	<h1>회원 상세페이지</h1>
-	<c:forEach items="${u_idx}" var = "user">
+	
 		<table>
 			<tr>
 				<td>회원 번호</td>
@@ -61,13 +61,13 @@
 			
 			<tr style="height:50px;">
 				<td style="border:none;">
-					<a href="userEdit.jsp?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:#818181;color:#fff;" >수정</a>
+					<a href="edit.do?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:#818181;color:#fff;">수정</a>
 				</td>
 				<td style="border:none;">
-					<a href="userDelete.jsp?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:red;color:#fff;">삭제</a>
+					<a href="delete.do?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:red;color:#fff;">삭제</a>
 				</td>
 			</tr>
 		</table>
-	</c:forEach>
+
 </body>
 </html>
