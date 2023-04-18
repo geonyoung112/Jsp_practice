@@ -20,7 +20,6 @@ public class Controller extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usercount = 0;
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
@@ -29,14 +28,14 @@ public class Controller extends HttpServlet {
 		String command = requestURI.substring(contextPath.length());
 		String view = null;
 		
-
+		
+		
 		switch (command) {
 			case "/list.do":
 				UserService2 userService = UserService2.getInstance();
 				ArrayList<User2> list= userService.getUsers();
 				view = "test2/userlist";
 				request.setAttribute("list", list);
-				request.setAttribute("usercount", usercount);
 				break;
 				
 			case "/newjoin.do":

@@ -61,9 +61,6 @@ public class UserDAO2 {
 		return list;
 	} 
 	
-	public int getUsersCount() {
-		Connection conn = null;
-	}
 	
 	public void insertUser(User2 user4) {
 		Connection conn = null;
