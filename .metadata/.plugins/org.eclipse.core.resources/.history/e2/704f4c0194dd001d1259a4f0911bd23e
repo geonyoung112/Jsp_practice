@@ -34,10 +34,9 @@ public class Controller extends HttpServlet {
 			case "/list.do":
 				UserService2 userService = UserService2.getInstance();
 				ArrayList<User2> list= userService.getUsers();
-				usercount = userService.getUsersCount();
+				view = "test2/userlist";
 				request.setAttribute("list", list);
 				request.setAttribute("usercount", usercount);
-				view = "test2/userlist";
 				break;
 				
 			case "/newjoin.do":

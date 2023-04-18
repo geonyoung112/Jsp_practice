@@ -212,3 +212,16 @@
 0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:03:11 +0900] "POST /lcomputerstudy/editprocess.do HTTP/1.1" 200 210
 0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:03:12 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 1972
 0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:03:16 +0900] "GET /lcomputerstudy/newjoin.do?u_idx= HTTP/1.1" 200 753
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:22:58 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 1972
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:22:59 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 1972
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:23:05 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2132
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:50:25 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:50:26 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:50:28 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:08 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:09 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:10 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:10 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:12 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2133
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:52:18 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2134
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:11:53:05 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2134

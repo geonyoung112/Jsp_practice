@@ -32,11 +32,6 @@ public class UserService2 {
 	public void deleteUser(int u_idx3) {
 		dao.deleteUser(u_idx3);
 	}
-	
-	public int getUsersCount() {
-		return dao.getUsersCount();
-	}
-	
 	public static UserService2 getInstance() {
 		if(service == null) {
 			service = new UserService2();
