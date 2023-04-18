@@ -42,7 +42,11 @@
 				<td>${user.u_name}</td>
 		     </tr>
 		</c:forEach>
-	
+			 <tr style="height:50px;">	
+				<td style="border:none;">
+					<a href="newjoin.do?u_idx=${user.u_idx}" style="width:70%;font-weight:700;background-color:#818181;color:#fff;">회원가입</a>
+				</td>
+			</tr>
 	</table>
 </body>
 </html>

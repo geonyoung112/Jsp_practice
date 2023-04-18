@@ -7,23 +7,11 @@
 <title>회원 삭제</title>
 </head>
 <body>
-<%@ include file="db_connection.jsp" %>
-
-<%
-	String idx = request.getParameter("u_idx");
-	System.out.println(idx);
-	
-	PreparedStatement pstmt = null;
-
-    String query = "delete from user where u_idx=?";
-   	pstmt = conn.prepareStatement(query);
-   	pstmt.setString(1, idx);
-   	pstmt.executeUpdate();
-%>
 	<h2>삭제 완료</h2>
 <script>
 setTimeout(function () {
-	window.location.href = "userlist.jsp";
+	window.location.href = "list.do";
 </script>
+<a href = "/lcomputerstudy/list.do">돌아가기</a>
 </body>
 </html>

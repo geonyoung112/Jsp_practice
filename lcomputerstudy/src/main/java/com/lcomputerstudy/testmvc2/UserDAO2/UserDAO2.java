@@ -105,8 +105,10 @@ public class UserDAO2 {
 				user = new User2();
 				user.setU_idx(rs.getInt("u_idx"));
 		   	    user.setU_id(rs.getString("u_id"));
+		   	    user.setU_pw(rs.getString("u_pw"));
 		   	    user.setU_name(rs.getString("u_name"));
-		   	    user.setU_tel(rs.getString("u_tel"));
+		        user.setU_tel(rs.getString("u_tel"));
+       	       	user.setU_tels(user.getU_tel().split("-"));
 		   	    user.setU_age(rs.getString("u_age"));
 			}
 		} catch(Exception e) {
@@ -174,17 +176,18 @@ public class UserDAO2 {
 
         try {
             conn = DBConnection2.getConnection();
-            String sql = "UPDATE user SET u_id = ?,u_pw = ?,u_name = ?,u_tel = ?,u_age = ? WHERE u_idx = ?";
+            String sql = "UPDATE user SET u_id = ?,u_pw = ?,u_name = ?,u_tel = ?,u_age = ? WHERE u_idx=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, user4.getU_id());
             pstmt.setString(2, user4.getU_pw());
             pstmt.setString(3, user4.getU_name());
             pstmt.setString(4, user4.getU_tel());
             pstmt.setString(5, user4.getU_age());
+            pstmt.setInt(6, user4.getU_idx());
             pstmt.executeUpdate();
 
         } catch (Exception ex) {
-            System.out.println("SQLException : " + ex.getMessage());
+            ex.printStackTrace();
         } finally {
         	try {
         		 if (pstmt != null) pstmt.close();
@@ -194,6 +197,27 @@ public class UserDAO2 {
 			}
 		}
 	}
-    
+
+    public void deleteUser(int u_idx3) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DBConnection2.getConnection();
+            String query = "DELETE FROM user WHERE u_idx = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, u_idx3);
+            pstmt.executeUpdate();
+        } catch (Exception ex) {
+			ex.printStackTrace();
+        } finally {
+        	try {
+        		if (pstmt != null) pstmt.close();
+    			if (conn != null)  conn.close();
+	        } catch (SQLException e) {
+				e.printStackTrace();
+	        }
+        }
+    }
 }
 	
