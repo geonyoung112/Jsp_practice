@@ -95,7 +95,7 @@ edit.jsp
 	}
   ```
   
-  ## 오류 6. 
+  ## 오류 6. u_idx2, service.java
   ```
   controller.java
   
