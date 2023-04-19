@@ -144,3 +144,6 @@
 0:0:0:0:0:0:0:1 - - [19/Apr/2023:11:42:54 +0900] "GET /lcomputerstudy/list.do?page=6 HTTP/1.1" 200 1526
 0:0:0:0:0:0:0:1 - - [19/Apr/2023:11:51:57 +0900] "GET /lcomputerstudy/list.do?page=6 HTTP/1.1" 200 1605
 0:0:0:0:0:0:0:1 - - [19/Apr/2023:11:51:58 +0900] "GET /lcomputerstudy/list.do?page=1 HTTP/1.1" 200 2313
+0:0:0:0:0:0:0:1 - - [19/Apr/2023:11:53:32 +0900] "GET /lcomputerstudy/list.do?page=1 HTTP/1.1" 200 2313
+127.0.0.1 - - [19/Apr/2023:11:54:01 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [19/Apr/2023:11:54:02 +0900] "GET /lcomputerstudy/list.do HTTP/1.1" 200 2313
