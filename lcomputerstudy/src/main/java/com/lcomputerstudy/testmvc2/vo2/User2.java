@@ -51,4 +51,5 @@ public class User2 {
 	public void setU_age(String u_age) {
 		this.u_age = u_age;
 	}
+
 }

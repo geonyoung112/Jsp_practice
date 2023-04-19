@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.lcomputerstudy.testmvc2.database2.DBConnection2;
+import com.lcomputerstudy.testmvc2.vo2.Pagination;
 import com.lcomputerstudy.testmvc2.vo2.User2;
 
 public class UserDAO2 {
@@ -23,17 +24,25 @@ public class UserDAO2 {
 		return dao;
 	}
 	
-	public ArrayList<User2> getUsers(){
+	public ArrayList<User2> getUsers(Pagination pagination){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<User2> list = null;
+		int pageNum = pagination.getPageNum();
 		
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query = "select * from user";
+			//String query = "select * from user limit ?,3";
+			String query = new StringBuilder()
+					.append("SELECT 		ta.*\n")
+					.append("FROM 			user ta\n")
+					.append("LIMIT			?, ?\n")
+					.toString();
 	       	pstmt = conn.prepareStatement(query);
+	       	pstmt.setInt(1, pageNum);
+	       	pstmt.setInt(2, Pagination.perPage);
 	        rs = pstmt.executeQuery();
 	        list = new ArrayList<User2>();
 
@@ -77,7 +86,7 @@ public class UserDAO2 {
 	        	count = rs.getInt("count");
 	        }
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		} finally {
 			try {
 				if (rs != null) rs.close();
@@ -104,8 +113,8 @@ public class UserDAO2 {
 			pstmt.setString(4, user4.getU_tel());
 			pstmt.setString(5, user4.getU_age());
 			pstmt.executeUpdate();
-		} catch( Exception ex) {
-			System.out.println("SQLException : "+ex.getMessage());
+		} catch( Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (pstmt != null) pstmt.close();
@@ -181,7 +190,7 @@ public class UserDAO2 {
                 user2.setU_age(rs.getString("u_age"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        	e.printStackTrace();
         }  finally {
 
 			try {
@@ -214,8 +223,8 @@ public class UserDAO2 {
             pstmt.setInt(6, user4.getU_idx());
             pstmt.executeUpdate();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+        	e.printStackTrace();
         } finally {
         	try {
         		 if (pstmt != null) pstmt.close();
@@ -236,8 +245,8 @@ public class UserDAO2 {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, u_idx3);
             pstmt.executeUpdate();
-        } catch (Exception ex) {
-			ex.printStackTrace();
+        } catch (Exception e) {
+        	e.printStackTrace();
         } finally {
         	try {
         		if (pstmt != null) pstmt.close();

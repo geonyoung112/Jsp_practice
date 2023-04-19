@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.lcomputerstudy.testmvc2.service2.UserService2;
+import com.lcomputerstudy.testmvc2.vo2.Pagination;
 import com.lcomputerstudy.testmvc2.vo2.User2;
 
 @WebServlet("*.do")
@@ -20,7 +21,8 @@ public class Controller extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usercount = 0;
+		int page = 1;
+		int count = 0;
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
@@ -28,15 +30,27 @@ public class Controller extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		String view = null;
+
 		
 
 		switch (command) {
 			case "/list.do":
+				String reqPage = request.getParameter("page");
+				if(reqPage != null) {
+					page = Integer.parseInt(reqPage);
+					
+				}
 				UserService2 userService = UserService2.getInstance();
-				ArrayList<User2> list= userService.getUsers();
-				usercount = userService.getUsersCount();
+				count = userService.getUsersCount();
+				Pagination pagination = new Pagination();
+				pagination.setPage(page);
+				pagination.setCount(count);
+				pagination.init();
+				
+				ArrayList<User2> list= userService.getUsers(pagination);
+				
 				request.setAttribute("list", list);
-				request.setAttribute("usercount", usercount);
+				request.setAttribute("pagination", pagination);
 				view = "test2/userlist";
 				break;
 				
