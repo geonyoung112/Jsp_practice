@@ -116,4 +116,67 @@ edit.jsp
 	}
   ```
   
+  ## 오류 7. JSTL 비교연산 오류 해결
+  ```
+  == eq
+
+  != ne
+
+  < lt
+
+  > gt
+
+  <= le
+
+  >= ge
+  ```
+  
+  이전페이지 버튼 오: 1보다 크거나 같을 때 이전 페이지로 가는 화살표를 보이게 한다.
+  ```
+  usrlist.jsp
+  <!-- 아래부터 pagination -->
+	<div>
+
+		<ul>
+			 <c:choose>
+				<c:when test="${ pagination.prevPage ge 1}"> 
+				<!-- 버튼이 보이지 않는 오류 해결_숫자 5를 1로 변경 -->
+					<li>
+						<a href="list.do?page=${pagination.prevPage}">
+							◀
+						</a>
+					</li>
+				</c:when>
+			</c:choose> 
+			<c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+				
+					<c:choose>
+						<c:when test="${ pagination.page eq i }">
+							
+							<li style="background-color:#ededed;">
+								<span>${i}</span>
+							</li>
+						</c:when>
+						<c:when test="${ pagination.page ne i }">
+							<li>
+								<a href="list.do?page=${i}">${i}</a>
+							</li>
+						</c:when>
+					</c:choose>
+			</c:forEach>
+```
+다음 페이지 버튼 오류: 마지막 페이지 번호보다 작거나 같을 때 다음 페이지로 가는 화살표를 보이게 한다.
+```
+			 <c:choose>
+				<c:when test="${ pagination.nextPage le pagination.lastPage }">
+					<!-- 버튼이 보이지 않는 오류 해결_ge를 le로 변경(>=을 <=으로)-->
+					<li style="">
+						<a href="list.do?page=${pagination.nextPage}">▶</a>
+					</li>
+				</c:when>
+			</c:choose> 
+		</ul>
+	</div>
+```
+  
   
