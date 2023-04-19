@@ -74,7 +74,8 @@
 
 		<ul>
 			 <c:choose>
-				<c:when test="${ pagination.prevPage ge 5}">
+				<c:when test="${ pagination.prevPage ge 1}"> 
+				<!-- 버튼이 보이지 않는 오류 해결_숫자 5를 1로 변경 -->
 					<li>
 						<a href="list.do?page=${pagination.prevPage}">
 							◀
@@ -99,7 +100,8 @@
 					</c:choose>
 			</c:forEach>
 			 <c:choose>
-				<c:when test="${ pagination.nextPage lt pagination.lastPage }">
+				<c:when test="${ pagination.nextPage le pagination.lastPage }">
+					<!-- 버튼이 보이지 않는 오류 해결_ge를 le로 변경(>=을 <=으로)-->
 					<li style="">
 						<a href="list.do?page=${pagination.nextPage}">▶</a>
 					</li>
