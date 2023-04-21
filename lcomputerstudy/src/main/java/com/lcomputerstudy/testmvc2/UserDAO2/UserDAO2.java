@@ -256,5 +256,40 @@ public class UserDAO2 {
 	        }
         }
     }
+    
+    public User2 loginUser(String idx, String pw) {
+    	Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	User2 user = null;
+    	
+    	try {
+			conn = DBConnection2.getConnection();
+			String sql = "SELECT * FROM user WHERE u_id = ? AND u_pw = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){     
+				user = new User2();
+				user.setU_idx(rs.getInt("u_idx"));
+	        	user.setU_pw(rs.getString("u_pw"));
+	        	user.setU_id(rs.getString("u_id"));
+	        	user.setU_name(rs.getString("u_name"));
+		   }
+		} catch( Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	} 
+
 }
 	

@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.lcomputerstudy.testmvc2.service2.UserService2;
 import com.lcomputerstudy.testmvc2.vo2.Pagination;
 import com.lcomputerstudy.testmvc2.vo2.User2;
@@ -23,6 +25,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = 1;
 		int count = 0;
+		String pw = null;
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
@@ -112,6 +115,31 @@ public class Controller extends HttpServlet {
 			    request.setAttribute("u_idx", u_idx3);
 				view = "test2/userDelete";
 			    break;
+			    
+			case "/user-login.do":
+				view = "test2/login";
+				break;
+			
+			case "/user-login-process.do":
+				String u_idx1 = request.getParameter("login_id");
+				String pw1 = request.getParameter("login_password");
+				
+				userService = UserService2.getInstance();
+				user = userService.loginUser(u_idx1, pw1);
+							
+				if(user != null) {
+					HttpSession session = request.getSession();
+//					session.setAttribute("u_idx", user.getU_idx());
+//					session.setAttribute("u_id", user.getU_id());
+//					session.setAttribute("u_pw", user.getU_pw());
+//					session.setAttribute("u_name", user.getU_name());
+					session.setAttribute("user", user);
+
+					view = "test2/login-result";
+				} else {
+					view = "test2/login-fail";
+				}			
+				break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");
