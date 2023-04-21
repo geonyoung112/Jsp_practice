@@ -26,12 +26,14 @@ public class Controller extends HttpServlet {
 		int page = 1;
 		int count = 0;
 		String pw = null;
+		HttpSession session = null;
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
+		command = checkSession(request, response, command);
 		String view = null;
 
 		
@@ -128,7 +130,7 @@ public class Controller extends HttpServlet {
 				user = userService.loginUser(u_idx1, pw1);
 							
 				if(user != null) {
-					HttpSession session = request.getSession();
+					session = request.getSession();
 //					session.setAttribute("u_idx", user.getU_idx());
 //					session.setAttribute("u_id", user.getU_id());
 //					session.setAttribute("u_pw", user.getU_pw());
@@ -140,11 +142,47 @@ public class Controller extends HttpServlet {
 					view = "test2/login-fail";
 				}			
 				break;
+				
+			case "/logout.do":
+				session = request.getSession();
+				session.invalidate();
+				view = "test2/login";
+				break;
+			
+			case "/access-denied.do":
+				view = "test2/access-denied";
+				break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");
 		rd.forward(request, response);
 	}
+		
+		String checkSession (HttpServletRequest request, HttpServletResponse response, String command) {
+			HttpSession session = request.getSession();
+			
+			String[] authList = {
+					"/list.do"
+					,"/newjoin.do"
+					,"/joinresult.do"
+					,"/detail.do"
+					,"/edit.do"
+					,"/editprocess.do"
+					,"/logout.do"
+				};
+			
+			for(String item : authList) {
+				if(item.equals(command)) {
+					if(session.getAttribute("user") == null) {
+						command = "/access-denied.do";
+					}
+				}
+			}
+			return command;
+		}
+		
+	
+	
 
 }
 
