@@ -152,6 +152,14 @@ public class Controller extends HttpServlet {
 			case "/access-denied.do":
 				view = "test2/access-denied";
 				break;
+				
+				
+				
+				
+//     -------    게시판 controller	-------- 			
+			case "/write.do":
+				view = "board/write_view";
+				break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");
@@ -181,9 +189,7 @@ public class Controller extends HttpServlet {
 			return command;
 		}
 		
-	
-	
-
+		
 }
 
 
