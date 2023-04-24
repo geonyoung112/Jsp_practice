@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.lcomputerstudy.testmvc2.service2.UserService2;
 import com.lcomputerstudy.testmvc2.vo2.Pagination;
 import com.lcomputerstudy.testmvc2.vo2.User2;
+import com.lcomputerstudy.testmvc3.service.BoardService;
+import com.lcomputerstudy.testmvc3.vo.Board;
 
 @WebServlet("*.do")
 public class Controller extends HttpServlet {
@@ -158,7 +160,29 @@ public class Controller extends HttpServlet {
 				
 //     -------    게시판 controller	-------- 			
 			case "/write.do":
+				String b_writer = request.getParameter("b_writer");
+				String b_title = request.getParameter("b_title");
+				String b_content = request.getParameter("b_content");
+				BoardService boardService = BoardService.getInstance();
+				boardService.write(b_writer, b_title, b_content);
 				view = "board/write_view";
+				break;
+				
+				
+			case "/write-list.do":
+				boardService = BoardService.getInstance();
+				ArrayList<Board> boardlist = boardService.boardlist();
+				request.setAttribute("listAll", boardlist);
+				view = "board/write_list";
+				break;
+				
+			
+			case "/content-view.do":
+				String b_idx = request.getParameter("b_idx");
+				boardService = BoardService.getInstance();
+			    boardService.contentView(b_idx);
+			    request.setAttribute("b_idx", b_idx);
+				view = "board/content_view.jsp";
 				break;
 		}
 		

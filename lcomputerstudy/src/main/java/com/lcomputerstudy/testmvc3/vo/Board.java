@@ -1,11 +1,20 @@
 package com.lcomputerstudy.testmvc3.vo;
 
+import java.sql.Timestamp;
+
 public class Board {
+	
 	private int b_idx;
 	private String b_title;
 	private String b_content;
-	private String b_date;
-	private String b_write;
+	private Timestamp b_date;
+	private String b_writer;
+	private int b_readcount;
+	private int b_ref;
+	private int b_restep;
+	private int b_relevel;
+	
+	
 	public int getB_idx() {
 		return b_idx;
 	}
@@ -24,22 +33,49 @@ public class Board {
 	public void setB_content(String b_content) {
 		this.b_content = b_content;
 	}
-	public String getB_date() {
-		return b_date;
+	
+	public String getB_writer() {
+		return b_writer;
 	}
-	public void setB_date(String b_date) {
-		this.b_date = b_date;
-	}
-	public String getB_write() {
-		return b_write;
-	}
-	public void setB_write(String b_write) {
-		this.b_write = b_write;
-	}
-	@Override
-	public String toString() {
-		return "Board [b_idx=" + b_idx + ", b_title=" + b_title + ", b_content=" + b_content + ", b_date=" + b_date
-				+ ", b_write=" + b_write + "]";
+	public void setB_writer(String b_writer) {
+		this.b_writer = b_writer;
 	}
 	
+	public Timestamp getB_date() {
+		return b_date;
+	}
+	public void setB_date(Timestamp b_date) {
+		this.b_date = b_date;
+	}
+	public int getB_readcount() {
+		return b_readcount;
+	}
+	public void setB_readcount(int b_readcount) {
+		this.b_readcount = b_readcount;
+	}
+	public int getB_ref() {
+		return b_ref;
+	}
+	public void setB_ref(int b_ref) {
+		this.b_ref = b_ref;
+	}
+	public int getB_restep() {
+		return b_restep;
+	}
+	public void setB_restep(int b_restep) {
+		this.b_restep = b_restep;
+	}
+	public int getB_relevel() {
+		return b_relevel;
+	}
+	public void setB_relevel(int b_relevel) {
+		this.b_relevel = b_relevel;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [b_idx=" + b_idx + ", b_title=" + b_title + ", b_content=" + b_content + ", b_Date=" + b_date
+				+ ", b_writer=" + b_writer + ", b_readCount=" + b_readcount + ", b_ref=" + b_ref + ", b_restep="
+				+ b_restep + ", b_relevel=" + b_relevel + "]";
+	}
 }

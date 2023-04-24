@@ -41,6 +41,7 @@ public class UserService2 {
 	public User2 loginUser(String u_idx1, String pw1) {
 		return dao.loginUser(u_idx1, pw1);
 	}
+	
 	public static UserService2 getInstance() {
 		if(service == null) {
 			service = new UserService2();

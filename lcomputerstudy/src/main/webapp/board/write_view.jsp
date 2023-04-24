@@ -11,18 +11,18 @@
 	<table style = "width: 500px;">
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="bWriter" size="50"></td>
+			<td><input type="text" name="b_writer" size="50"></td>
 		</tr>
 		<tr>
 			<td>제목</td>
-			<td><input type="text" name="bSubject" size="50"></td>
+			<td><input type="text" name="b_title" size="50"></td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="bContent" row="10"></textarea></td>
+			<td><textarea name="b_content" row="10"></textarea></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="입력">&nbsp;&nbsp;<a href="write-list.do">목록보기</a></td>
+			<td><input type="submit" value="입력">&nbsp;&nbsp;<a href="write-list.do">목록</a></td>
 		</tr>
 	</table>
 </form>

@@ -6,4 +6,9 @@
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc2.vo2.Pagination"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.DAO.BoardDAO"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.service.BoardService"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.vo.Board"/>
+    <fullyQualifiedTypeName name="java.security.Timestamp"/>
 </qualifiedTypeNameHistroy>
