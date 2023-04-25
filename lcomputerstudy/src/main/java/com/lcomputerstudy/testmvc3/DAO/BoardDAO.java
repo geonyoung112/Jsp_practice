@@ -190,5 +190,27 @@ public class BoardDAO {
 		}
 	}
 	
+	public void delete(int b_idx2) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+			
+		try {
+			conn = DBConnection2.getConnection();
+			String query="DELETE FROM bbs WHERE b_idx=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, b_idx2);
+			pstmt.executeUpdate();
+	        
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }

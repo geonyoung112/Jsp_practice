@@ -33,11 +33,12 @@
 				<td><textarea rows="10" name="edit_content">${content.b_content}</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="수정">&nbsp;&nbsp;
+				<td colspan="2">
+					<input type="submit" value="수정">&nbsp;&nbsp;
 					<a href="write-list.do">목록보기</a>&nbsp;&nbsp;
-					<a href="delete.do?b_idx=${content.b_idx}">삭제</a>&nbsp;&nbsp;
-					<a href="reply_view.do?b_idx=${content.b_idx}">답변</a>
+					<a href="write-delete.do?b_idx=${content.b_idx}">삭제</a>&nbsp;&nbsp;
 				</td>
+					<!--  <td> <a href="reply_view.do?b_idx=${content.b_idx}">답변</a> </td> -->
 			</tr>
 			
 		</table>

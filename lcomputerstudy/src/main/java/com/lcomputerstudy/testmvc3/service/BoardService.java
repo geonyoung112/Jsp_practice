@@ -31,6 +31,10 @@ public class BoardService {
 		dao.modify(board2);
 	}
 	
+	public void delete(int b_idx2) {
+		dao.delete(b_idx2);
+	}
+	
 	public static BoardService getInstance() {
 		if(service == null) {
 			service = new BoardService();

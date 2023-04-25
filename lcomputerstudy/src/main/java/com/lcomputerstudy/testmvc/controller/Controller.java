@@ -177,7 +177,7 @@ public class Controller extends HttpServlet {
 				view = "board/write_list";
 				break;
 				
-			 
+// ------ 오류: 글작성시 안적고 목록으로 가도 글이 2개 생성, 등록하고 난 후에도 2개 생성 (하나는 공백) -----
 				
 			case "/content-view.do":
 				int b_idx = Integer.parseInt(request.getParameter("b_idx"));
@@ -200,6 +200,9 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/write-delete.do":
+				int b_idx2 = Integer.parseInt(request.getParameter("b_idx"));
+				boardService = BoardService.getInstance();
+			    boardService.delete(b_idx2);
 				view = "board/delete";
 				break;
 				
