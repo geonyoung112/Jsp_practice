@@ -22,8 +22,8 @@ public class BoardService {
 	
 	
 	// ---return 타입으로 수정---//
-		public Board contentView(Board board2) {
-			return dao.contentView(board2);
+		public Board contentView(int b_idx) {
+			return dao.contentView(b_idx);
 		}
 
 	public void modify(Board board2) {

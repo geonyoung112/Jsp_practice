@@ -96,7 +96,7 @@ public class BoardDAO {
 	
 // ------ 목록까지 완 -----
 
-	public void readCount(Board board2) {
+	public void readCount(int b_idx) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		
@@ -106,7 +106,7 @@ public class BoardDAO {
 			// bReadCount = bReadCount + 1 --> 기본 값 0
 			String query="UPDATE bbs SET b_readcount = b_readcount+1 WHERE b_idx=?";
 			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1,board2.getB_idx());
+			pstmt.setInt(1, b_idx);
 			pstmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -124,9 +124,8 @@ public class BoardDAO {
 	
 // ---- return 타입으로 다시 메소드 작성,  controller도 같이 슈정 -- //
 
-	public Board contentView(Board board2) {
-		readCount(board2);
-		
+	public Board contentView(int b_idx) {
+		readCount(b_idx);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -136,7 +135,7 @@ public class BoardDAO {
 			conn = DBConnection2.getConnection();
 			String query = "SELECT * FROM bbs WHERE b_idx=?";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, board2.getB_idx());
+			pstmt.setInt(1, b_idx);
 			rs = pstmt.executeQuery();
 				
 			if(rs.next()) {
@@ -155,7 +154,9 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			try {
-					
+				rs.close();
+				pstmt.close();
+				conn.close();
 			}catch(Exception e2) {
 				e2.printStackTrace();
 			}

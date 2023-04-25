@@ -177,24 +177,30 @@ public class Controller extends HttpServlet {
 				view = "board/write_list";
 				break;
 				
-			
+			 
+				
 			case "/content-view.do":
-				Board board2 = new Board();
-				board2.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+				int b_idx = Integer.parseInt(request.getParameter("b_idx"));
 				boardService = BoardService.getInstance();
-			    boardService.contentView(board2);
+			    Board board2 = boardService.contentView(b_idx);
 			    request.setAttribute("content", board2);
 				view = "board/content_view";
 				break;
-			
+
 			case "/modify.do":
 				Board board3 = new Board();
 				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
-				board3.setB_title(request.getParameter("b_title"));
-				board3.setB_content(request.getParameter("b_content"));
-				BoardService boardService2 = BoardService.getInstance();
-				boardService2.modify(board3);
+				board3.setB_writer(request.getParameter("edit_writer"));
+				board3.setB_title(request.getParameter("edit_title"));
+				board3.setB_content(request.getParameter("edit_content"));
+				boardService = BoardService.getInstance();
+				boardService.modify(board3);
+				request.setAttribute("content", board3);
 				view = "board/modify";
+				break;
+				
+			case "/write-delete.do":
+				view = "board/delete";
 				break;
 				
 				

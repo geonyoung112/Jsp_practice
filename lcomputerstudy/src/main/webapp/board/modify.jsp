@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수정</title>
+<title>수정 값 넘겨받기</title>
 </head>
 <body>
-<h1>저장 완료</h1>
+<h1>수정 완료</h1>
 <a href="/lcomputerstudy/write-list.do">돌아가기</a>
 </body>
 </html>
