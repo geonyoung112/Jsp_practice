@@ -34,7 +34,7 @@
 			<%-- 제목이 출력되는 위치 --%>
 			<%-- 1부터 글의 레벨까지 --%>
 			<c:forEach begin="1" end="${brd.b_relevel}"><span class="b_relevel">[re]</span></c:forEach>
-			<a href="content_view.do?b_idx=${brd.b_idx}">${brd.b_title}</a>
+			<a href="content-view.do?b_idx=${brd.b_idx}">${brd.b_title}</a>
 		</td> 
 		<td><fmt:formatDate value="${brd.b_date}" pattern="yyyy-MM-dd" /></td> 
 		<td>${brd.b_readcount}</td> 

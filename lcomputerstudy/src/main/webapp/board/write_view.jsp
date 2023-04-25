@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="b_content" row="10"></textarea></td>
+			<td><textarea name="b_content" rows="10" cols="50"></textarea></td>
 		</tr>
 		<tr>
 			<td><input type="submit" value="입력">&nbsp;&nbsp;<a href="write-list.do">목록</a></td>

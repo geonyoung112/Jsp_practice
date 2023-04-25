@@ -16,10 +16,20 @@ public class BoardService {
 	
 
 
-	public void write(String b_writer, String b_title, String b_content) {
-		dao.write(b_writer, b_title, b_content);
+	public void write(Board board) {
+		dao.write(board);
 	}
 	
+	
+	// ---return 타입으로 수정---//
+		public Board contentView(Board board2) {
+			return dao.contentView(board2);
+		}
+
+	public void modify(Board board2) {
+		// TODO Auto-generated method stub
+		dao.modify(board2);
+	}
 	
 	public static BoardService getInstance() {
 		if(service == null) {
@@ -34,8 +44,4 @@ public class BoardService {
 	}
 
 
-// ---return 타입으로 수정---//
-	public void contentView(String b_idx) {
-		dao.contentView(b_idx);
-	}
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.lcomputerstudy.testmvc2.database2.DBConnection2;
@@ -23,21 +24,19 @@ public class BoardDAO {
 		return dao;
 	}
 
-	public void write(String b_writer, String b_title, String b_content) {
+	public void write(Board board) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="insert into board(b_idx, b_titile, b_content, b_date, b_writer)";
+			String query="INSERT INTO bbs(b_writer, b_title, b_content, b_date) VALUES (?, ?, ?, NOW())";
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, b_writer);
-			pstmt.setString(2, b_title);
-			pstmt.setString(3, b_content);
-			int rn = pstmt.executeUpdate();
-			rs = pstmt.executeQuery();
+			pstmt.setString(1, board.getB_writer());
+			pstmt.setString(2, board.getB_title());
+			pstmt.setString(3, board.getB_content());
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -60,7 +59,7 @@ public class BoardDAO {
 		try {
 			conn = DBConnection2.getConnection();
 			String query="SELECT b_idx, b_writer, b_title, b_content, b_date, b_readcount, b_ref, b_restep, b_relevel "
-					+ "FROM bbs order by b_ref desc, b_restep asc";
+					+ "FROM bbs ORDER BY b_ref desc, b_restep asc";
 	       	pstmt = conn.prepareStatement(query);
 	        rs = pstmt.executeQuery();
 	        boardlist = new ArrayList<Board>();
@@ -94,8 +93,10 @@ public class BoardDAO {
 	
 	}
 
-// -----업데이트 작성 : 데베 타입으로 수정----
-	public void readCount(String b_idx) {
+	
+// ------ 목록까지 완 -----
+
+	public void readCount(Board board2) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		
@@ -103,9 +104,9 @@ public class BoardDAO {
 			conn = DBConnection2.getConnection();
 			
 			// bReadCount = bReadCount + 1 --> 기본 값 0
-			String query="UPDATE bbs SET b_readcount=bReadCount+1 WHERE b_idx=?";
+			String query="UPDATE bbs SET b_readcount = b_readcount+1 WHERE b_idx=?";
 			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,b_idx);
+			pstmt.setInt(1,board2.getB_idx());
 			pstmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -123,21 +124,32 @@ public class BoardDAO {
 	
 // ---- return 타입으로 다시 메소드 작성,  controller도 같이 슈정 -- //
 
-	public void contentView(String b_idx) {
-		readCount(b_idx);
+	public Board contentView(Board board2) {
+		readCount(board2);
 		
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Board board = null;
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query="select * from bbs where bIdx=?";
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, Integer.parseInt(b_idx));
-			rs=pstmt.executeQuery();
+			String query = "SELECT * FROM bbs WHERE b_idx=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board2.getB_idx());
+			rs = pstmt.executeQuery();
 				
 			if(rs.next()) {
+				board = new Board();
+				board.setB_idx(rs.getInt("b_idx"));
+       	       	board.setB_writer(rs.getString("b_writer"));
+       	       	board.setB_title(rs.getString("b_title"));
+       	       	board.setB_content(rs.getString("b_content"));
+       	       	board.setB_date(rs.getTimestamp("b_date"));
+       	       	board.setB_readcount(rs.getInt("b_readcount"));
+       	       	board.setB_ref(rs.getInt("b_ref"));
+       	       	board.setB_restep(rs.getInt("b_restep"));
+       	       	board.setB_relevel(rs.getInt("b_relevel"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -148,7 +160,33 @@ public class BoardDAO {
 				e2.printStackTrace();
 			}
 		}
-		// return board;
+		return board; 
+	}
+
+	public void modify(Board board2) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBConnection2.getConnection();
+			String query="UPDATE bbs SET b_title=?, b_content=? WHERE b_idx=?";
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, board2.getB_title());
+			pstmt.setString(2, board2.getB_content());
+			pstmt.setInt(3, board2.getB_idx());
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	
 	

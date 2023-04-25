@@ -160,11 +160,12 @@ public class Controller extends HttpServlet {
 				
 //     -------    게시판 controller	-------- 			
 			case "/write.do":
-				String b_writer = request.getParameter("b_writer");
-				String b_title = request.getParameter("b_title");
-				String b_content = request.getParameter("b_content");
+				Board board = new Board();
+				board.setB_writer(request.getParameter("b_writer"));
+				board.setB_title(request.getParameter("b_title"));
+				board.setB_content(request.getParameter("b_content"));
 				BoardService boardService = BoardService.getInstance();
-				boardService.write(b_writer, b_title, b_content);
+				boardService.write(board);
 				view = "board/write_view";
 				break;
 				
@@ -178,12 +179,26 @@ public class Controller extends HttpServlet {
 				
 			
 			case "/content-view.do":
-				String b_idx = request.getParameter("b_idx");
+				Board board2 = new Board();
+				board2.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
 				boardService = BoardService.getInstance();
-			    boardService.contentView(b_idx);
-			    request.setAttribute("b_idx", b_idx);
-				view = "board/content_view.jsp";
+			    boardService.contentView(board2);
+			    request.setAttribute("content", board2);
+				view = "board/content_view";
 				break;
+			
+			case "/modify.do":
+				Board board3 = new Board();
+				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+				board3.setB_title(request.getParameter("b_title"));
+				board3.setB_content(request.getParameter("b_content"));
+				BoardService boardService2 = BoardService.getInstance();
+				boardService2.modify(board3);
+				view = "board/modify";
+				break;
+				
+				
+
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view+".jsp");
