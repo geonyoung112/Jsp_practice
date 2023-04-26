@@ -103,8 +103,6 @@ public class Controller extends HttpServlet {
 			    user4.setU_name(request.getParameter("edit_name"));
 				user4.setU_tel(request.getParameter("edit_tel1") + "-" + request.getParameter("edit_tel2") + "-" + request.getParameter("edit_tel3"));
 				user4.setU_age(request.getParameter("edit_age"));
-
-				
 				userService = UserService2.getInstance();
 				userService.editprocess(user4);
 				request.setAttribute("user", user4);
@@ -160,13 +158,17 @@ public class Controller extends HttpServlet {
 				
 //     -------    게시판 controller	-------- 		
 			case "/write-form.do":
-				view = "board/write_form";
+				HttpSession session2 = request.getSession(false);
+				if (session2 == null || session2.getAttribute("user") == null) {
+				    view = "test2/login";
+				} else {
+					view = "board/write_form";
+				}
 				break;
 				
 			case "/write-action.do":
-
 				Board board = new Board();
-				board.setB_writer(request.getParameter("b_writer"));
+				board.setU_id(request.getParameter("u_id"));
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
 				BoardService boardService = BoardService.getInstance();
@@ -195,7 +197,7 @@ public class Controller extends HttpServlet {
 			case "/modify.do":
 				Board board3 = new Board();
 				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
-				board3.setB_writer(request.getParameter("edit_writer"));
+				board3.setU_id(request.getParameter("edit_id"));
 				board3.setB_title(request.getParameter("edit_title"));
 				board3.setB_content(request.getParameter("edit_content"));
 				boardService = BoardService.getInstance();

@@ -29,7 +29,7 @@
 	<tr>
 		<%-- 변수가 아닌 getter method 호출 --%>
 		<td>${brd.b_idx}</td> 
-		<td>${brd.b_writer}</td> 
+		<td>${brd.u_idx}</td> 
 		<td>
 			<%-- 제목이 출력되는 위치 --%>
 			<%-- 1부터 글의 레벨까지 --%>

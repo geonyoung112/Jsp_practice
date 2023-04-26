@@ -30,12 +30,11 @@ public class BoardDAO {
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO bbs(b_writer, b_title, b_content, b_date) VALUES (?, ?, ?, NOW())";
+			String query="INSERT INTO board(b_title, b_content, b_date) VALUES (?, ?, NOW())";
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, board.getB_writer());
-			pstmt.setString(2, board.getB_title());
-			pstmt.setString(3, board.getB_content());
+			pstmt.setString(1, board.getB_title());
+			pstmt.setString(2, board.getB_content());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -59,8 +58,8 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query="SELECT b_idx, b_writer, b_title, b_content, b_date, b_readcount, b_ref, b_restep, b_relevel "
-					+ "FROM bbs ORDER BY b_ref desc, b_restep asc";
+			String query="SELECT b_idx, u_id, b_title, b_content, b_date, b_readcount, b_ref, b_restep, b_relevel "
+					+ "FROM board ORDER BY b_ref desc, b_restep asc";
 	       	pstmt = conn.prepareStatement(query);
 	        rs = pstmt.executeQuery();
 	        boardlist = new ArrayList<Board>();
@@ -68,7 +67,7 @@ public class BoardDAO {
 	        while(rs.next()){     
 	        	Board board = new Board();
        	       	board.setB_idx(rs.getInt("b_idx"));
-       	       	board.setB_writer(rs.getString("b_writer"));
+       	       	board.setU_id(rs.getString("u_id"));
        	       	board.setB_title(rs.getString("b_title"));
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
@@ -105,7 +104,7 @@ public class BoardDAO {
 			conn = DBConnection2.getConnection();
 			
 			// bReadCount = bReadCount + 1 --> 기본 값 0
-			String query="UPDATE bbs SET b_readcount = b_readcount+1 WHERE b_idx=?";
+			String query="UPDATE board SET b_readcount = b_readcount+1 WHERE b_idx=?";
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1, b_idx);
 			pstmt.executeUpdate();
@@ -134,7 +133,7 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query = "SELECT * FROM bbs WHERE b_idx=?";
+			String query = "SELECT * FROM board WHERE b_idx=?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, b_idx);
 			rs = pstmt.executeQuery();
@@ -142,7 +141,7 @@ public class BoardDAO {
 			if(rs.next()) {
 				board = new Board();
 				board.setB_idx(rs.getInt("b_idx"));
-       	       	board.setB_writer(rs.getString("b_writer"));
+       	       	board.setU_id(rs.getString("u_id"));
        	       	board.setB_title(rs.getString("b_title"));
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
@@ -172,7 +171,7 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query="UPDATE bbs SET b_title=?, b_content=? WHERE b_idx=?";
+			String query="UPDATE board SET b_title=?, b_content=? WHERE b_idx=?";
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, board2.getB_title());
 			pstmt.setString(2, board2.getB_content());
@@ -197,7 +196,7 @@ public class BoardDAO {
 			
 		try {
 			conn = DBConnection2.getConnection();
-			String query="DELETE FROM bbs WHERE b_idx=?";
+			String query="DELETE FROM board WHERE b_idx=?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, b_idx2);
 			pstmt.executeUpdate();

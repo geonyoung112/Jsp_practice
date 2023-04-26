@@ -47,6 +47,7 @@
 	<ul>
 		<li><a href="list.do">회원 목록</a></li>
 		<li><a href="logout.do">로그아웃</a></li>
+		<li><a href="write-form.do">게시글 작성</a></li>
 	</ul>
 </div>
 </body>

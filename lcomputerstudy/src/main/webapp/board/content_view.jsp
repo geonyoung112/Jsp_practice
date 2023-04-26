@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="edit_writer" value="${content.b_writer}" readonly></td>	
+				<td><input type="text" name="edit_idx" value="${content.b_writer}" readonly></td>	
 			</tr>
 			<tr>
 				<td>제목</td>

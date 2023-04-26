@@ -12,7 +12,7 @@
 	<table style = "width: 500px;">
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="b_writer" size="50"></td>
+			<td><input type="text" name="u_id" size="50"></td>
 		</tr>
 		<tr>
 			<td>제목</td>
