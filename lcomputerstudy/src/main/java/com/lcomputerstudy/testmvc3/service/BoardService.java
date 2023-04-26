@@ -13,11 +13,9 @@ public class BoardService {
 	private BoardService() {
 		
 	}
-	
 
-
-	public void write(Board board) {
-		dao.write(board);
+	public void writeaction(Board board) {
+		dao.writeaction(board);
 	}
 	
 	
@@ -27,7 +25,6 @@ public class BoardService {
 		}
 
 	public void modify(Board board2) {
-		// TODO Auto-generated method stub
 		dao.modify(board2);
 	}
 	

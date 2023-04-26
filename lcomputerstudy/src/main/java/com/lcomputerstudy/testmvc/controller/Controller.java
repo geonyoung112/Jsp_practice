@@ -158,15 +158,20 @@ public class Controller extends HttpServlet {
 				
 				
 				
-//     -------    게시판 controller	-------- 			
-			case "/write.do":
+//     -------    게시판 controller	-------- 		
+			case "/write-form.do":
+				view = "board/write_form";
+				break;
+				
+			case "/write-action.do":
+
 				Board board = new Board();
 				board.setB_writer(request.getParameter("b_writer"));
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
 				BoardService boardService = BoardService.getInstance();
-				boardService.write(board);
-				view = "board/write_view";
+				boardService.writeaction(board);
+				view = "board/write_action";
 				break;
 				
 				

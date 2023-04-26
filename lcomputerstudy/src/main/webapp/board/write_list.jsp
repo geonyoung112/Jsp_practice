@@ -41,7 +41,7 @@
 	</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5"><a href="write.do">글 작성</a></td>
+		<td colspan="5"><a href="write-form.do">글 작성</a></td>
 	</tr>
 </table>
 </body>

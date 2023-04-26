@@ -24,7 +24,7 @@ public class BoardDAO {
 		return dao;
 	}
 
-	public void write(Board board) {
+	public void writeaction(Board board) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -49,6 +49,7 @@ public class BoardDAO {
 		}
 		
 	}
+	
 
 	public ArrayList<Board> boardlist() {
 		ArrayList<Board> boardlist = null;

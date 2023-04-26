@@ -7,7 +7,8 @@
 <title>게시판 글 등록</title>
 </head>
 <body>
-<form action = "write.do" method="post">
+<!-- 제출시 등록 글로 넘어가기: write-action.do  -->
+<form action = "write-action.do" method="post">
 	<table style = "width: 500px;">
 		<tr>
 			<td>이름</td>

@@ -37,8 +37,8 @@
 					<input type="submit" value="수정">&nbsp;&nbsp;
 					<a href="write-list.do">목록보기</a>&nbsp;&nbsp;
 					<a href="write-delete.do?b_idx=${content.b_idx}">삭제</a>&nbsp;&nbsp;
+					<a href="reply_view.do?b_idx=${content.b_idx}">답변</a>
 				</td>
-					<!--  <td> <a href="reply_view.do?b_idx=${content.b_idx}">답변</a> </td> -->
 			</tr>
 			
 		</table>
