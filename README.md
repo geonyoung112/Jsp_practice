@@ -131,7 +131,7 @@ edit.jsp
   >= ge
   ```
   
-  이전페이지 버튼 오: 1보다 크거나 같을 때 이전 페이지로 가는 화살표를 보이게 한다.
+  이전페이지 버튼 오류류: 1보다 크거나 같을 때 이전 페이지로 가는 화살표를 보이게 한다.
   ```
   usrlist.jsp
   <!-- 아래부터 pagination -->
@@ -180,3 +180,24 @@ edit.jsp
 ```
   
   
+## 오류 8: 게시글 등록시 공백으로 하나 더 올라가는 것
+```
+--    게시판 controller	-------- 	
+
+/* 해당 문제는 게시글 내용을 작성하기도 전에 먼저 글이 등록되어서 생기는 오류 
+해결 방법: 게시글을 작성하는 폼과 게시글이 올라가는 동작을 나눠서 작성함 */
+
+			case "/write-form.do":
+				view = "board/write_form";
+				break;
+				
+			case "/write-action.do":
+				Board board = new Board();
+				board.setB_writer(request.getParameter("b_writer"));
+				board.setB_title(request.getParameter("b_title"));
+				board.setB_content(request.getParameter("b_content"));
+				BoardService boardService = BoardService.getInstance();
+				boardService.writeaction(board);
+				view = "board/write_action";
+				break;
+````
