@@ -2,24 +2,39 @@ package com.lcomputerstudy.testmvc3.vo;
 
 import java.sql.Timestamp;
 
+import com.lcomputerstudy.testmvc.vo.User;
+
 public class Board {
 	
 	private int b_idx;
+	private int u_idx;
 	private String b_title;
 	private String b_content;
 	private Timestamp b_date;
-	private String u_id;
 	private int b_readcount;
 	private int b_ref;
 	private int b_restep;
 	private int b_relevel;
+	private User user;
 	
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getB_idx() {
 		return b_idx;
 	}
 	public void setB_idx(int b_idx) {
 		this.b_idx = b_idx;
+	}
+	public int getU_idx() {
+		return u_idx;
+	}
+	public void setU_idx(int u_idx) {
+		this.u_idx = u_idx;
 	}
 	public String getB_title() {
 		return b_title;
@@ -32,12 +47,6 @@ public class Board {
 	}
 	public void setB_content(String b_content) {
 		this.b_content = b_content;
-	}
-	public String getU_id() {
-		return u_id;
-	}
-	public void setU_id(String u_id) {
-		this.u_id = u_id;
 	}
 	public Timestamp getB_date() {
 		return b_date;
@@ -72,8 +81,8 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [b_idx=" + b_idx + ", b_title=" + b_title + ", b_content=" + b_content + ", b_Date=" + b_date
-				+ ", u_id=" + u_id + ", b_readCount=" + b_readcount + ", b_ref=" + b_ref + ", b_restep="
+		return "Board [b_idx=" + b_idx + ", u_idx= " + u_idx + ", b_title=" + b_title + ", b_content=" + b_content + ", b_Date=" + b_date
+				+ ", b_readCount=" + b_readcount + ", b_ref=" + b_ref + ", b_restep="
 				+ b_restep + ", b_relevel=" + b_relevel + "]";
 	}
 }

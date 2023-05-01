@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lcomputerstudy.testmvc.vo.User;
 import com.lcomputerstudy.testmvc2.service2.UserService2;
 import com.lcomputerstudy.testmvc2.vo2.Pagination;
 import com.lcomputerstudy.testmvc2.vo2.User2;
@@ -168,7 +169,6 @@ public class Controller extends HttpServlet {
 				
 			case "/write-action.do":
 				Board board = new Board();
-				board.setU_id(request.getParameter("u_id"));
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
 				BoardService boardService = BoardService.getInstance();
@@ -197,7 +197,7 @@ public class Controller extends HttpServlet {
 			case "/modify.do":
 				Board board3 = new Board();
 				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
-				board3.setU_id(request.getParameter("edit_id"));
+       	       //	board3.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분
 				board3.setB_title(request.getParameter("edit_title"));
 				board3.setB_content(request.getParameter("edit_content"));
 				boardService = BoardService.getInstance();

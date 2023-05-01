@@ -27,9 +27,8 @@
 	<%-- forEach 반복문/글목록 --%>
 	<c:forEach var="brd" items="${listAll}"> 
 	<tr>
-		<%-- 변수가 아닌 getter method 호출 --%>
 		<td>${brd.b_idx}</td> 
-		<td>${brd.u_idx}</td> 
+		<td>${brd.user.u_id}</td> 
 		<td>
 			<%-- 제목이 출력되는 위치 --%>
 			<%-- 1부터 글의 레벨까지 --%>

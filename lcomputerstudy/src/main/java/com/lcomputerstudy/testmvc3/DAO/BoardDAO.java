@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.lcomputerstudy.testmvc.vo.User;
 import com.lcomputerstudy.testmvc2.database2.DBConnection2;
 import com.lcomputerstudy.testmvc3.vo.Board;
 public class BoardDAO {
@@ -31,7 +31,6 @@ public class BoardDAO {
 		try {
 			conn = DBConnection2.getConnection();
 			String query="INSERT INTO board(b_title, b_content, b_date) VALUES (?, ?, NOW())";
-			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getB_title());
 			pstmt.setString(2, board.getB_content());
@@ -58,16 +57,26 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query="SELECT b_idx, u_id, b_title, b_content, b_date, b_readcount, b_ref, b_restep, b_relevel "
-					+ "FROM board ORDER BY b_ref desc, b_restep asc";
+			String query="SELECT b.b_idx, u.u_id, b.b_title, b.b_content, b.b_date, b.b_readcount, b.b_ref, b.b_restep, b.b_relevel "
+					+ "FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx ORDER BY b.b_ref desc, b.b_restep asc";
+			
 	       	pstmt = conn.prepareStatement(query);
 	        rs = pstmt.executeQuery();
 	        boardlist = new ArrayList<Board>();
 
 	        while(rs.next()){     
-	        	Board board = new Board();
-       	       	board.setB_idx(rs.getInt("b_idx"));
-       	       	board.setU_id(rs.getString("u_id"));
+       	       	Board board = new Board();
+       	       	User user = new User();
+       	       	user.setU_idx(rs.getInt("u_idx"));
+       	       	user.setU_id(rs.getString("u_id"));
+       	       	user.setU_name(rs.getString("u_name"));
+       	       	user.setU_pw(rs.getString("u_pw"));
+       	       	user.setU_age(rs.getString("u_age"));
+       	       	user.setU_tel(rs.getString("u_tel"));
+       	       	board.setUser(user);
+       	        //board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
+       	       	
+    	       	board.setB_idx(rs.getInt("b_idx"));
        	       	board.setB_title(rs.getString("b_title"));
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
@@ -133,7 +142,7 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query = "SELECT * FROM board WHERE b_idx=?";
+			String query = "SELECT * FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx WHERE b_idx=?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, b_idx);
 			rs = pstmt.executeQuery();
@@ -141,7 +150,12 @@ public class BoardDAO {
 			if(rs.next()) {
 				board = new Board();
 				board.setB_idx(rs.getInt("b_idx"));
-       	       	board.setU_id(rs.getString("u_id"));
+				
+				User user = new User();
+       	       	user.setU_id(rs.getString("u_id"));
+       	       	board.setUser(user);
+       	       	board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
+       	       	
        	       	board.setB_title(rs.getString("b_title"));
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
