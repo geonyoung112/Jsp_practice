@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.lcomputerstudy.testmvc.dao.BoardDAO;
 import com.lcomputerstudy.testmvc.vo.Board;
+import com.lcomputerstudy.testmvc.vo.Boardpagination;
 
 public class BoardService {
 
@@ -32,6 +33,10 @@ public class BoardService {
 		dao.delete(b_idx2);
 	}
 	
+	public void replyView(int b_idx3) {
+		dao.replyView(b_idx3);
+	}
+	
 	public static BoardService getInstance() {
 		if(service == null) {
 			service = new BoardService();
@@ -40,8 +45,12 @@ public class BoardService {
 		return service;
 	}
 	
-	public ArrayList<Board> boardlist() {
-		return dao.boardlist();
+	public ArrayList<Board> boardlist(Boardpagination pagination2) {
+		return dao.boardlist(pagination2);
+	}
+
+	public int getBoardsCount() {
+		return dao.getBoardsCount();
 	}
 
 

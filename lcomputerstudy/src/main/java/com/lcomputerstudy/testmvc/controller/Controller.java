@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.lcomputerstudy.testmvc.service.BoardService;
 import com.lcomputerstudy.testmvc.service.UserService2;
 import com.lcomputerstudy.testmvc.vo.Board;
+import com.lcomputerstudy.testmvc.vo.Boardpagination;
 import com.lcomputerstudy.testmvc.vo.Pagination;
 import com.lcomputerstudy.testmvc.vo.User;
 import com.lcomputerstudy.testmvc.vo.User2;
@@ -39,6 +40,7 @@ public class Controller extends HttpServlet {
 		command = checkSession(request, response, command);
 		String view = null;
 		User2 user2 = null;
+		Board board = null;
 
 		
 
@@ -170,7 +172,6 @@ public class Controller extends HttpServlet {
 				session = request.getSession();
 				//getAttribute는 기본 object를 가져오기 때문에 우리가 사용하고자 하는 class를 다운 캐스팅하기
 				user2 = (User2)session.getAttribute("user");
-				Board board = new Board();
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
 				board.setU_idx(user2.getU_idx());
@@ -179,31 +180,41 @@ public class Controller extends HttpServlet {
 				view = "board/write_action";
 				break;
 				
-				
 			case "/write-list.do":
+				String reqPage2 = request.getParameter("page");
+				if(reqPage2 != null) {
+					page = Integer.parseInt(reqPage2);
+					
+				}
 				boardService = BoardService.getInstance();
-				ArrayList<Board> boardlist = boardService.boardlist();
+				count = boardService.getBoardsCount();
+				Boardpagination pagination2 = new Boardpagination();
+				pagination2.setPage(page);
+				pagination2.setCount(count);
+				pagination2.init();
+				
+				ArrayList<Board> boardlist = boardService.boardlist(pagination2);
 				request.setAttribute("listAll", boardlist);
+				request.setAttribute("pagination", pagination2);
 				view = "board/write_list";
 				break;
 				
 			case "/content-view.do":
 				int b_idx = Integer.parseInt(request.getParameter("b_idx"));
 				boardService = BoardService.getInstance();
-			    Board board2 = boardService.contentView(b_idx);
-			    request.setAttribute("content", board2);
+			    board = boardService.contentView(b_idx);
+			    request.setAttribute("content", board);
 				view = "board/content_view";
 				break;
 
 			case "/modify.do":
-				Board board3 = new Board();
-				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+				board.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
        	       //	board3.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분
-				board3.setB_title(request.getParameter("edit_title"));
-				board3.setB_content(request.getParameter("edit_content"));
+				board.setB_title(request.getParameter("edit_title"));
+				board.setB_content(request.getParameter("edit_content"));
 				boardService = BoardService.getInstance();
-				boardService.modify(board3);
-				request.setAttribute("content", board3);
+				boardService.modify(board);
+				request.setAttribute("content", board);
 				view = "board/modify";
 				break;
 				
@@ -213,7 +224,17 @@ public class Controller extends HttpServlet {
 			    boardService.delete(b_idx2);
 				view = "board/delete";
 				break;
-				
+			
+			
+			case "/reply_view.do":
+				int b_idx3 = Integer.parseInt(request.getParameter("b_idx"));
+				boardService = BoardService.getInstance();
+				boardService.replyView(b_idx3);
+				request.setAttribute("reply", board);
+				view = "board/reply_view";
+				break;
+			
+	
 				
 
 		}

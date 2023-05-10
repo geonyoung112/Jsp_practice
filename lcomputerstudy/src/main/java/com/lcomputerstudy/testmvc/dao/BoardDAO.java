@@ -4,18 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.lcomputerstudy.testmvc.database.DBConnection2;
 import com.lcomputerstudy.testmvc.vo.Board;
+import com.lcomputerstudy.testmvc.vo.Boardpagination;
+import com.lcomputerstudy.testmvc.vo.Pagination;
 import com.lcomputerstudy.testmvc.vo.User;
 public class BoardDAO {
 	
 	private static BoardDAO dao = null;
 	
-	private BoardDAO() {
-		
-	}
 	
 	public static BoardDAO getInstance() {
 		if(dao == null) {
@@ -50,18 +50,24 @@ public class BoardDAO {
 	}
 	
 
-	public ArrayList<Board> boardlist() {
+	public ArrayList<Board> boardlist(Boardpagination pagination2) {
 		ArrayList<Board> boardlist = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		int pageNum = pagination2.getPageNum();
+
+
 		try {
 			conn = DBConnection2.getConnection();
-			String query="SELECT * "
-					+ "FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx ORDER BY b.b_ref desc, b.b_restep asc";
-			
+			String query = new StringBuilder()
+					.append("SELECT 		ta.*\n")
+					.append("FROM 			board ta\n")
+					.append("LIMIT			?, ?\n")
+					.toString();
 	       	pstmt = conn.prepareStatement(query);
+	       	pstmt.setInt(1, pageNum);
+	       	pstmt.setInt(2, Pagination.perPage);
 	        rs = pstmt.executeQuery();
 	        boardlist = new ArrayList<Board>();
 
@@ -102,9 +108,36 @@ public class BoardDAO {
 		return boardlist;
 	
 	}
+	public int getBoardsCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try {
+			conn = DBConnection2.getConnection();
+			String query = "SELECT COUNT(*) AS count FROM board ";
+	       	pstmt = conn.prepareStatement(query);
+	        rs = pstmt.executeQuery();
+	        
+	        while(rs.next()){     
+	        	count = rs.getInt("count");
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 
 	
-// ------ 목록까지 완 -----
 
 	public void readCount(int b_idx) {
 		Connection conn=null;
@@ -227,5 +260,52 @@ public class BoardDAO {
 			}
 		}
 	}
+
+
+	public void replyView(int b_idx3) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Board board = null;
+		
+		try {
+			conn = DBConnection2.getConnection();
+			
+			String query="SELECT * FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx WHERE b_idx=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, b_idx3);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Board();
+				board.setB_idx(rs.getInt("b_idx"));
+				//Duplicate local variable 변수명 , 중복 변수명 주의
+				
+				User user = new User();
+       	       	user.setU_id(rs.getString("u_id"));
+       	       	board.setUser(user);
+       	       	board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
+       	       	
+       	       	board.setB_title(rs.getString("b_title"));
+       	       	board.setB_content(rs.getString("b_content"));
+       	       	board.setB_date(rs.getTimestamp("b_date"));
+       	       	board.setB_readcount(rs.getInt("b_readcount"));
+       	       	board.setB_ref(rs.getInt("b_ref"));
+       	       	board.setB_restep(rs.getInt("b_restep"));
+       	       	board.setB_relevel(rs.getInt("b_relevel"));
+			}
+					
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}finally {
+				try {
+					if(pstmt != null) pstmt.close();
+					if(conn != null) conn.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
 	
 }

@@ -7,7 +7,7 @@
 <title>글 내용 보기</title>
 </head>
 <body>
-<h2>게시글 수정</h2>
+<h1>게시글 조회</h1>
 	<form action="modify.do" name= "content" method="post">
 		<table style="width:500px;">
 

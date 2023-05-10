@@ -8,11 +8,12 @@
 
 </head>
 <body>
+<h1>글쓰기</h1>
 <!-- 제출시 등록 글로 넘어가기: write-action.do  -->
 <form action = "write-action.do" method="post">
 	<table style = "width: 500px;">
 		<tr>
-			<td>제목</td>
+			<td >제목</td>
 			<td><input type="text" name="b_title" size="50"></td>
 		</tr>
 		<tr>
