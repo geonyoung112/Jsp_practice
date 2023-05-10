@@ -10,6 +10,8 @@
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.service.BoardService"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.vo.Board"/>
     <fullyQualifiedTypeName name="java.security.Timestamp"/>
-    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.User"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.dao.BoardDAO"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Boardpagination"/>
 </qualifiedTypeNameHistroy>

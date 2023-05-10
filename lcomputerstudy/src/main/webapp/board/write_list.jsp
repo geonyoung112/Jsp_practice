@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>write_list</title>
 <style>
-h1 {
+	h1 {
 		text-align:center;
 	}
 	table {
@@ -24,6 +24,7 @@ h1 {
 		text-align:center;
 	}
 	a {
+	
 		text-decoration:none;
 		color:#000;
 		font-weight:700;
@@ -73,13 +74,13 @@ h1 {
 		<td>${brd.b_readcount}</td> 
 	</tr>
 	</c:forEach>
-	<tr>
-		<td>
+	</table>
+		
+	<div align = 'center'>
 		<a href="write-form.do">글 작성</a>
 		<a href="logout.do">로그아웃</a>
-		</td>
-	</tr>
-	</table>
+	</div>
+	
 <!-- 아래부터 pagination -->
 	<div>
 	
