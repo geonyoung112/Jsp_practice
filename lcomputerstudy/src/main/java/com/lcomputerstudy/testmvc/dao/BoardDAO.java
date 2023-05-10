@@ -1,4 +1,4 @@
-package com.lcomputerstudy.testmvc3.DAO;
+package com.lcomputerstudy.testmvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.lcomputerstudy.testmvc.database.DBConnection2;
+import com.lcomputerstudy.testmvc.vo.Board;
 import com.lcomputerstudy.testmvc.vo.User;
-import com.lcomputerstudy.testmvc2.database2.DBConnection2;
-import com.lcomputerstudy.testmvc3.vo.Board;
 public class BoardDAO {
 	
 	private static BoardDAO dao = null;
@@ -30,10 +30,11 @@ public class BoardDAO {
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO board(b_title, b_content, b_date) VALUES (?, ?, NOW())";
+			String query="INSERT INTO board(b_title, u_idx, b_content, b_date) VALUES (?, ?, ?, NOW())";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getB_title());
-			pstmt.setString(2, board.getB_content());
+			pstmt.setInt(2, board.getU_idx());
+			pstmt.setString(3, board.getB_content());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class BoardDAO {
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query="SELECT b.b_idx, u.u_id, b.b_title, b.b_content, b.b_date, b.b_readcount, b.b_ref, b.b_restep, b.b_relevel "
+			String query="SELECT * "
 					+ "FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx ORDER BY b.b_ref desc, b.b_restep asc";
 			
 	       	pstmt = conn.prepareStatement(query);

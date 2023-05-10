@@ -1,13 +1,14 @@
-package com.lcomputerstudy.testmvc2.UserDAO2;
+package com.lcomputerstudy.testmvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.lcomputerstudy.testmvc2.database2.DBConnection2;
-import com.lcomputerstudy.testmvc2.vo2.Pagination;
-import com.lcomputerstudy.testmvc2.vo2.User2;
+
+import com.lcomputerstudy.testmvc.database.DBConnection2;
+import com.lcomputerstudy.testmvc.vo.Pagination;
+import com.lcomputerstudy.testmvc.vo.User2;
 
 public class UserDAO2 {
 	private static UserDAO2 dao = null;

@@ -1,9 +1,9 @@
-package com.lcomputerstudy.testmvc3.service;
+package com.lcomputerstudy.testmvc.service;
 
 import java.util.ArrayList;
 
-import com.lcomputerstudy.testmvc3.vo.Board;
-import com.lcomputerstudy.testmvc3.DAO.BoardDAO;
+import com.lcomputerstudy.testmvc.dao.BoardDAO;
+import com.lcomputerstudy.testmvc.vo.Board;
 
 public class BoardService {
 

@@ -1,8 +1,6 @@
-package com.lcomputerstudy.testmvc3.vo;
+package com.lcomputerstudy.testmvc.vo;
 
 import java.sql.Timestamp;
-
-import com.lcomputerstudy.testmvc.vo.User;
 
 public class Board {
 	

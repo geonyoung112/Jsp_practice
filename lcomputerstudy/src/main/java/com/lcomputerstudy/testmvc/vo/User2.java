@@ -1,4 +1,4 @@
-package com.lcomputerstudy.testmvc2.vo2;
+package com.lcomputerstudy.testmvc.vo;
 
 public class User2 {
 	private int u_idx;

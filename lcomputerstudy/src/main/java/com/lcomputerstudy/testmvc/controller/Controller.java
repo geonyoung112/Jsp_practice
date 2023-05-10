@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lcomputerstudy.testmvc.service.BoardService;
+import com.lcomputerstudy.testmvc.service.UserService2;
+import com.lcomputerstudy.testmvc.vo.Board;
+import com.lcomputerstudy.testmvc.vo.Pagination;
 import com.lcomputerstudy.testmvc.vo.User;
-import com.lcomputerstudy.testmvc2.service2.UserService2;
-import com.lcomputerstudy.testmvc2.vo2.Pagination;
-import com.lcomputerstudy.testmvc2.vo2.User2;
-import com.lcomputerstudy.testmvc3.service.BoardService;
-import com.lcomputerstudy.testmvc3.vo.Board;
+import com.lcomputerstudy.testmvc.vo.User2;
 
 @WebServlet("*.do")
 public class Controller extends HttpServlet {
@@ -38,6 +38,7 @@ public class Controller extends HttpServlet {
 		String command = requestURI.substring(contextPath.length());
 		command = checkSession(request, response, command);
 		String view = null;
+		User2 user2 = null;
 
 		
 
@@ -67,15 +68,14 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/joinresult.do":
-				User2 user = new User2();
-				user.setU_id(request.getParameter("id"));
-				user.setU_pw(request.getParameter("password"));
-				user.setU_name(request.getParameter("name"));
-				user.setU_tel(request.getParameter("tel1") + "-" + request.getParameter("tel2") + "-" + request.getParameter("tel3"));
-				user.setU_age(request.getParameter("age"));
+				user2.setU_id(request.getParameter("id"));
+				user2.setU_pw(request.getParameter("password"));
+				user2.setU_name(request.getParameter("name"));
+				user2.setU_tel(request.getParameter("tel1") + "-" + request.getParameter("tel2") + "-" + request.getParameter("tel3"));
+				user2.setU_age(request.getParameter("age"));
 				
 				userService = UserService2.getInstance();
-				userService.insertUser(user);
+				userService.insertUser(user2);
 						
 				view = "test2/join_process";
 				break;
@@ -83,7 +83,7 @@ public class Controller extends HttpServlet {
 			case "/detail.do":
 			    int u_idx = Integer.parseInt(request.getParameter("u_idx"));
 			    userService = UserService2.getInstance();
-			    User2 user2 = userService.detailUser(u_idx);
+			    user2 = userService.detailUser(u_idx);
 			    request.setAttribute("user", user2);
 			    view = "test2/userDetail";
 			    break;
@@ -91,22 +91,21 @@ public class Controller extends HttpServlet {
 			case "/edit.do":
 				int u_idx2 = Integer.parseInt(request.getParameter("u_idx"));
 				userService = UserService2.getInstance();
-				User2 user3 = userService.editUser(u_idx2);
-			    request.setAttribute("user", user3);
+				user2 = userService.editUser(u_idx2);
+			    request.setAttribute("user", user2);
 			    view = "test2/userEdit";
 			    break;
 			    
 			case "/editprocess.do":
-				User2 user4 = new User2();
-				user4.setU_idx(Integer.parseInt(request.getParameter("u_idx")));
-			    user4.setU_id(request.getParameter("edit_id"));
-			    user4.setU_pw(request.getParameter("edit_pw"));
-			    user4.setU_name(request.getParameter("edit_name"));
-				user4.setU_tel(request.getParameter("edit_tel1") + "-" + request.getParameter("edit_tel2") + "-" + request.getParameter("edit_tel3"));
-				user4.setU_age(request.getParameter("edit_age"));
+				user2.setU_idx(Integer.parseInt(request.getParameter("u_idx")));
+			    user2.setU_id(request.getParameter("edit_id"));
+			    user2.setU_pw(request.getParameter("edit_pw"));
+			    user2.setU_name(request.getParameter("edit_name"));
+				user2.setU_tel(request.getParameter("edit_tel1") + "-" + request.getParameter("edit_tel2") + "-" + request.getParameter("edit_tel3"));
+				user2.setU_age(request.getParameter("edit_age"));
 				userService = UserService2.getInstance();
-				userService.editprocess(user4);
-				request.setAttribute("user", user4);
+				userService.editprocess(user2);
+				request.setAttribute("user", user2);
 				 view = "test2/editProcess";
 			    break;
 			    
@@ -128,15 +127,15 @@ public class Controller extends HttpServlet {
 				String pw1 = request.getParameter("login_password");
 				
 				userService = UserService2.getInstance();
-				user = userService.loginUser(u_idx1, pw1);
+				user2 = userService.loginUser(u_idx1, pw1);
 							
-				if(user != null) {
+				if(user2 != null) {
 					session = request.getSession();
 //					session.setAttribute("u_idx", user.getU_idx());
 //					session.setAttribute("u_id", user.getU_id());
 //					session.setAttribute("u_pw", user.getU_pw());
 //					session.setAttribute("u_name", user.getU_name());
-					session.setAttribute("user", user);
+					session.setAttribute("user", user2);
 
 					view = "test2/login-result";
 				} else {
@@ -159,7 +158,7 @@ public class Controller extends HttpServlet {
 				
 //     -------    게시판 controller	-------- 		
 			case "/write-form.do":
-				HttpSession session2 = request.getSession(false);
+				HttpSession session2 = request.getSession();
 				if (session2 == null || session2.getAttribute("user") == null) {
 				    view = "test2/login";
 				} else {
@@ -168,9 +167,13 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/write-action.do":
+				session = request.getSession();
+				//getAttribute는 기본 object를 가져오기 때문에 우리가 사용하고자 하는 class를 다운 캐스팅하기
+				user2 = (User2)session.getAttribute("user");
 				Board board = new Board();
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
+				board.setU_idx(user2.getU_idx());
 				BoardService boardService = BoardService.getInstance();
 				boardService.writeaction(board);
 				view = "board/write_action";
@@ -183,8 +186,6 @@ public class Controller extends HttpServlet {
 				request.setAttribute("listAll", boardlist);
 				view = "board/write_list";
 				break;
-				
-// ------ 오류: 글작성시 안적고 목록으로 가도 글이 2개 생성, 등록하고 난 후에도 2개 생성 (하나는 공백) -----
 				
 			case "/content-view.do":
 				int b_idx = Integer.parseInt(request.getParameter("b_idx"));

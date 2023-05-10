@@ -1,9 +1,10 @@
-package com.lcomputerstudy.testmvc2.service2;
+package com.lcomputerstudy.testmvc.service;
 
 import java.util.ArrayList;
-import com.lcomputerstudy.testmvc2.UserDAO2.UserDAO2;
-import com.lcomputerstudy.testmvc2.vo2.Pagination;
-import com.lcomputerstudy.testmvc2.vo2.User2;
+
+import com.lcomputerstudy.testmvc.dao.UserDAO2;
+import com.lcomputerstudy.testmvc.vo.Pagination;
+import com.lcomputerstudy.testmvc.vo.User2;
 
 public class UserService2 {
 

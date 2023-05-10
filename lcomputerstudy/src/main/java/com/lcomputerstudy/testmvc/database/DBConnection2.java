@@ -1,4 +1,4 @@
-package com.lcomputerstudy.testmvc2.database2;
+package com.lcomputerstudy.testmvc.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
