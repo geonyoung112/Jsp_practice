@@ -39,8 +39,8 @@ public class BoardDAO {
 			pstmt.setInt(6, board.getB_depth());
 			pstmt.executeUpdate();
 			pstmt.close();
-			
-			query = "update group = last_insert_id() where pk = last_insert_id()";
+			//새글 작성해보기
+			query = "update board set b_group = last_insert_id() where b_idx = last_insert_id()";
 			pstmt = conn.prepareStatement(query);
 		} catch(Exception e) {
 			e.printStackTrace();
