@@ -201,3 +201,15 @@ edit.jsp
 				view = "board/write_action";
 				break;
 ````
+
+## 오류 9: pagination 목록에 게시글이 뜨지 않는 오류_( + 공통으로 쓰는 파일을 중복생성하지 말기)
+```
+try {
+			conn = DBConnection2.getConnection();
+			String query = new StringBuilder()
+					.append("SELECT 		b.*, u.u_id, u.u_name, u.u_pw, u.u_age, u.u_tel\n")
+					.append("FROM 			board b\n")
+					.append("LEFT JOIN user u ON b.u_idx = u.u_idx\n")
+					.append("LIMIT			?, ?\n")
+					.toString();
+```
