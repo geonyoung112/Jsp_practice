@@ -7,28 +7,40 @@
 <meta charset="UTF-8">
 <title>write_list</title>
 <style>
-	h1 {
-		text-align:center;
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+          margin: 3rem 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 1rem auto;
+        width: 80%;
+    }
+
+    th {
+        background-color: lightgreen;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td, th {
+        border: 1px solid #818181;
+        padding: 0.5rem;
+    }
+
+    a {
+   		text-decoration: none;
+  		color: black;
+        font-weight: bold;
+        
+    }
+    
+    a:hover {
+  		color: blue;
 	}
-	table {
-		border-collapse:collapse;
-		margin:40px auto;
-	}
-	table tr th {
-		bgcolor:lightgreen
-		font-weight:700;
-	}
-	table tr td, table tr th {
-		border:1px solid #818181;
-		width:200px;
-		text-align:center;
-	}
-	a {
 	
-		text-decoration:none;
-		color:#000;
-		font-weight:700;
-	}
 	ul {
 		width:600px;
 		height:50px;
@@ -45,6 +57,22 @@
 		border-radius:5px;
 	}
 
+	.button-style {
+    	font-size: 16px;
+   	 	padding: 8px 16px;
+   	 	margin: 2rem auto;
+  	}
+  	
+	table tr:first-child {
+	  background-color: #e6f3ff;
+	  color: black;
+	}
+	
+	div.pagination {
+	  text-align: center;
+	}
+
+    
 </style>
 </head>
 <body>
@@ -76,13 +104,16 @@
 	</c:forEach>
 	</table>
 		
-	<div align = 'center'>
-		<a href="write-form.do">글 작성</a>
-		<a href="logout.do">로그아웃</a>
-	</div>
-	
+<div align='center'>
+  <a href="write-form.do">
+    <button class="button-style">글 작성</button>
+  </a>
+  <a href="logout.do">
+    <button class="button-style">로그아웃</button>
+  </a>
+</div>
 <!-- 아래부터 pagination -->
-	<div>
+	<div class ="pagination">
 	
 		<ul>
 			 <c:choose>
