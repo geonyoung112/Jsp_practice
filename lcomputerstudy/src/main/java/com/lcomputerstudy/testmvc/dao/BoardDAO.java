@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import com.lcomputerstudy.testmvc.database.DBConnection2;
 import com.lcomputerstudy.testmvc.vo.Board;
-import com.lcomputerstudy.testmvc.vo.Boardpagination;
 import com.lcomputerstudy.testmvc.vo.Pagination;
 import com.lcomputerstudy.testmvc.vo.User;
 public class BoardDAO {
@@ -50,7 +49,7 @@ public class BoardDAO {
 	}
 	
 
-	public ArrayList<Board> boardlist(Boardpagination pagination2) {
+	public ArrayList<Board> boardlist(Pagination pagination2) {
 		ArrayList<Board> boardlist = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -61,8 +60,9 @@ public class BoardDAO {
 		try {
 			conn = DBConnection2.getConnection();
 			String query = new StringBuilder()
-					.append("SELECT 		ta.*\n")
-					.append("FROM 			board ta\n")
+					.append("SELECT 		b.*, u.*\n")
+					.append("FROM 			board b\n")
+					.append("LEFT JOIN user u ON b.u_idx = u.u_idx\n")
 					.append("LIMIT			?, ?\n")
 					.toString();
 	       	pstmt = conn.prepareStatement(query);

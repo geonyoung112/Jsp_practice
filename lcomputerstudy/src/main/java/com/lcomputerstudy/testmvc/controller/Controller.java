@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.lcomputerstudy.testmvc.service.BoardService;
 import com.lcomputerstudy.testmvc.service.UserService2;
 import com.lcomputerstudy.testmvc.vo.Board;
-import com.lcomputerstudy.testmvc.vo.Boardpagination;
 import com.lcomputerstudy.testmvc.vo.Pagination;
-import com.lcomputerstudy.testmvc.vo.User;
 import com.lcomputerstudy.testmvc.vo.User2;
 
 @WebServlet("*.do")
@@ -40,7 +38,6 @@ public class Controller extends HttpServlet {
 		command = checkSession(request, response, command);
 		String view = null;
 		User2 user2 = null;
-		Board board = null;
 
 		
 
@@ -172,6 +169,7 @@ public class Controller extends HttpServlet {
 				session = request.getSession();
 				//getAttribute는 기본 object를 가져오기 때문에 우리가 사용하고자 하는 class를 다운 캐스팅하기
 				user2 = (User2)session.getAttribute("user");
+				Board board  = new Board();
 				board.setB_title(request.getParameter("b_title"));
 				board.setB_content(request.getParameter("b_content"));
 				board.setU_idx(user2.getU_idx());
@@ -188,7 +186,7 @@ public class Controller extends HttpServlet {
 				}
 				boardService = BoardService.getInstance();
 				count = boardService.getBoardsCount();
-				Boardpagination pagination2 = new Boardpagination();
+				Pagination pagination2  = new Pagination();
 				pagination2.setPage(page);
 				pagination2.setCount(count);
 				pagination2.init();
@@ -208,13 +206,14 @@ public class Controller extends HttpServlet {
 				break;
 
 			case "/modify.do":
-				board.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+				Board board2 = new Board();
+				board2.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
        	       //	board3.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분
-				board.setB_title(request.getParameter("edit_title"));
-				board.setB_content(request.getParameter("edit_content"));
+				board2.setB_title(request.getParameter("edit_title"));
+				board2.setB_content(request.getParameter("edit_content"));
 				boardService = BoardService.getInstance();
-				boardService.modify(board);
-				request.setAttribute("content", board);
+				boardService.modify(board2);
+				request.setAttribute("content", board2);
 				view = "board/modify";
 				break;
 				
@@ -230,7 +229,7 @@ public class Controller extends HttpServlet {
 				int b_idx3 = Integer.parseInt(request.getParameter("b_idx"));
 				boardService = BoardService.getInstance();
 				boardService.replyView(b_idx3);
-				request.setAttribute("reply", board);
+				// request.setAttribute("reply", board);
 				view = "board/reply_view";
 				break;
 			
