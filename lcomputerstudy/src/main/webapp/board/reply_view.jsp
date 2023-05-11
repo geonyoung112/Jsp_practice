@@ -13,9 +13,9 @@
 			
 			<%-- ReplyViewCommand --%>
 			<input type="hidden" name="b_idx" value="${reply.b_idx}">
-			<input type="hidden" name="b_ref" value="${reply.b_ref}">
-			<input type="hidden" name="b_restep" value="${reply.b_restep}">
-			<input type="hidden" name="b_relevel" value="${reply.b_relevel}">
+			<input type="hidden" name="b_group" value="${reply.b_group}">
+			<input type="hidden" name="b_order" value="${reply.b_order}">
+			<input type="hidden" name="b_depth" value="${reply.b_depth}">
 		
 			<tr>
 				<%-- 고유번호/수정불가 --%>

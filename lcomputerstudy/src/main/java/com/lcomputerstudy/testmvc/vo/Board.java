@@ -10,9 +10,9 @@ public class Board {
 	private String b_content;
 	private Timestamp b_date;
 	private int b_readcount;
-	private int b_ref;
-	private int b_restep;
-	private int b_relevel;
+	private int b_group;
+	private int b_order;
+	private int b_depth;
 	private User user;
 	
 	
@@ -58,29 +58,29 @@ public class Board {
 	public void setB_readcount(int b_readcount) {
 		this.b_readcount = b_readcount;
 	}
-	public int getB_ref() {
-		return b_ref;
+	public int getB_group() {
+		return b_group;
 	}
-	public void setB_ref(int b_ref) {
-		this.b_ref = b_ref;
+	public void setB_group(int b_group) {
+		this.b_group = b_group;
 	}
-	public int getB_restep() {
-		return b_restep;
+	public int getB_order() {
+		return b_order;
 	}
-	public void setB_restep(int b_restep) {
-		this.b_restep = b_restep;
+	public void setB_order(int b_order) {
+		this.b_order = b_order;
 	}
-	public int getB_relevel() {
-		return b_relevel;
+	public int getB_depth() {
+		return b_depth;
 	}
-	public void setB_relevel(int b_relevel) {
-		this.b_relevel = b_relevel;
+	public void setB_depth(int b_depth) {
+		this.b_depth = b_depth;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [b_idx=" + b_idx + ", u_idx= " + u_idx + ", b_title=" + b_title + ", b_content=" + b_content + ", b_Date=" + b_date
-				+ ", b_readCount=" + b_readcount + ", b_ref=" + b_ref + ", b_restep="
-				+ b_restep + ", b_relevel=" + b_relevel + "]";
+				+ ", b_readCount=" + b_readcount + ", b_group=" + b_group + ", b_order="
+				+ b_order+ ", b_depth=" + b_depth + "]";
 	}
 }

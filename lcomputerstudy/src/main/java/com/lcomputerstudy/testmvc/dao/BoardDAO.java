@@ -29,12 +29,19 @@ public class BoardDAO {
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO board(b_title, u_idx, b_content, b_date) VALUES (?, ?, ?, NOW())";
+			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), 0, 1, 0)";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getB_title());
 			pstmt.setInt(2, board.getU_idx());
 			pstmt.setString(3, board.getB_content());
+			pstmt.setInt(4, board.getB_group());
+			pstmt.setInt(5, board.getB_order());
+			pstmt.setInt(6, board.getB_depth());
 			pstmt.executeUpdate();
+			pstmt.close();
+			
+			query = "update group = last_insert_id() where pk = last_insert_id()";
+			pstmt = conn.prepareStatement(query);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -88,9 +95,9 @@ public class BoardDAO {
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
        	       	board.setB_readcount(rs.getInt("b_readcount"));
-       	       	board.setB_ref(rs.getInt("b_ref"));
-       	       	board.setB_restep(rs.getInt("b_restep"));
-       	       	board.setB_relevel(rs.getInt("b_relevel"));
+       	       	board.setB_group(rs.getInt("b_group"));
+       	       	board.setB_order(rs.getInt("b_order"));
+       	       	board.setB_depth(rs.getInt("b_depth"));
        	       	boardlist.add(board);
 	        }
 		} catch (Exception e) {
@@ -194,9 +201,9 @@ public class BoardDAO {
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
        	       	board.setB_readcount(rs.getInt("b_readcount"));
-       	       	board.setB_ref(rs.getInt("b_ref"));
-       	       	board.setB_restep(rs.getInt("b_restep"));
-       	       	board.setB_relevel(rs.getInt("b_relevel"));
+       	       	board.setB_group(rs.getInt("b_group"));
+       	       	board.setB_order(rs.getInt("b_order"));
+       	       	board.setB_depth(rs.getInt("b_depth"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -290,9 +297,9 @@ public class BoardDAO {
        	       	board.setB_content(rs.getString("b_content"));
        	       	board.setB_date(rs.getTimestamp("b_date"));
        	       	board.setB_readcount(rs.getInt("b_readcount"));
-       	       	board.setB_ref(rs.getInt("b_ref"));
-       	       	board.setB_restep(rs.getInt("b_restep"));
-       	       	board.setB_relevel(rs.getInt("b_relevel"));
+       	       	board.setB_group(rs.getInt("b_group"));
+       	       	board.setB_order(rs.getInt("b_order"));
+       	       	board.setB_depth(rs.getInt("b_depth"));
 			}
 					
 			}catch(Exception ex) {
