@@ -29,7 +29,7 @@ public class BoardDAO {
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), 0, 1, 0)";
+			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getB_title());
 			pstmt.setInt(2, board.getU_idx());
@@ -42,6 +42,7 @@ public class BoardDAO {
 			//새글 작성해보기
 			query = "update board set b_group = last_insert_id() where b_idx = last_insert_id()";
 			pstmt = conn.prepareStatement(query);
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -71,6 +72,7 @@ public class BoardDAO {
 					.append("FROM 			board b\n")
 					.append("LEFT JOIN user u ON b.u_idx = u.u_idx\n")
 					.append("LIMIT			?, ?\n")
+					//.append("ORDER BY 		b.b_group DESC, b.b_order DESC, b.b_depth DESC\n")
 					.toString();
 	       	pstmt = conn.prepareStatement(query);
 	       	pstmt.setInt(1, pageNum);
@@ -267,40 +269,45 @@ public class BoardDAO {
 			}
 		}
 	}
-
-
-	public void replyView(int b_idx3) {
+	
+//------------------답글 상세기능 ----------------------
+	public void replyStep(int b_group, int b_order) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBConnection2.getConnection();
+			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_step>?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, b_group);
+			pstmt.setInt(2, b_order);
+			pstmt.executeQuery();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void replyView(Board board) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Board board = null;
+		replyStep(b_group, b_order);
+		
 		
 		try {
 			conn = DBConnection2.getConnection();
-			
-			String query="SELECT * FROM board b LEFT JOIN user u ON b.u_idx = u.u_idx WHERE b_idx=?";
+			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, b_idx3);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				board = new Board();
-				board.setB_idx(rs.getInt("b_idx"));
-				//Duplicate local variable 변수명 , 중복 변수명 주의
-				
-				User user = new User();
-       	       	user.setU_id(rs.getString("u_id"));
-       	       	board.setUser(user);
-       	       	board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
-       	       	
-       	       	board.setB_title(rs.getString("b_title"));
-       	       	board.setB_content(rs.getString("b_content"));
-       	       	board.setB_date(rs.getTimestamp("b_date"));
-       	       	board.setB_readcount(rs.getInt("b_readcount"));
-       	       	board.setB_group(rs.getInt("b_group"));
-       	       	board.setB_order(rs.getInt("b_order"));
-       	       	board.setB_depth(rs.getInt("b_depth"));
-			}
+			
 					
 			}catch(Exception ex) {
 				ex.printStackTrace();

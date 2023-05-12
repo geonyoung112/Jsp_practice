@@ -54,5 +54,10 @@ public class BoardService {
 		return dao.boardlist(pagination2);
 	}
 
+	public void replyAction(Board board4) {
+		dao.modify(board4);
+		
+	}
+
 
 }

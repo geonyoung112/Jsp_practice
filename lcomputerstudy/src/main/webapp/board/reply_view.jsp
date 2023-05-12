@@ -5,10 +5,48 @@
 <head>
 <meta charset="UTF-8">
 <title>reply_view</title>
+<style>
+	h1 {
+		margin: 20px 0;
+	}
+	table {
+		width: 100%;
+		margin: 20px 0;
+		border-collapse: collapse;
+	}
+	td {
+		padding: 10px;
+		border: 1px solid #ccc;
+	}
+	textarea, input[type="text"] {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		resize: none;
+		box-sizing: border-box;
+	}
+
+	input[type="submit"], input[type="reset"]{
+		display: inline-block;
+		padding: 10px 20px;
+		margin: 0 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		text-decoration: none;
+		color: #333;
+		cursor: pointer;
+	}
+	input[type="submit"]:hover,  input[type="reset"]:hover {
+		background-color: #f5f5f5;
+	}
+	
+	
+</style>
 </head>
 <body>
 <h1>답글 쓰기</h1>
-	<form action="reply.do" name="reply"  method="post">
+	<form action="reply_action.do" name="reply"  method="post">
 		<table style="width:500px;">
 			
 			<%-- ReplyViewCommand --%>
@@ -32,18 +70,20 @@
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="edit_title" value="${reply.b_title}"></td>
+				<td><input type="text" name="re_title" value="${reply.b_title}"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" name="edit_content">${reply.b_content}</textarea></td>
+				<td><textarea rows="10" name="re_content">${reply.b_content}</textarea></td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<input type="submit" value="답변"> <a href="write-list.do">목록</a>
-				</td>
-			</tr>
+			
 		</table>
+			<div>
+				<input type="submit" value="답변"> 
+				<input type="reset" value="재입력">
+				<a href="write-list.do">목록</a>
+				
+			</div>
 	</form>
 
 </body>

@@ -55,7 +55,7 @@
 			<%-- bIdx hidden --%>
 			<tr>
 				<td>번호</td>
-				<td>		<input type="hidden" name="b_idx" value="${content.b_idx}">${content.b_idx}</td>
+				<td><input type="hidden" name="b_idx" value="${content.b_idx}">${content.b_idx}</td>
 			</tr>
 			<tr>
 				<td>조회수</td>
