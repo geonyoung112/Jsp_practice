@@ -227,9 +227,9 @@ public class Controller extends HttpServlet {
 //------------------답글 상세기능 ----------------------			
 			case "/reply_view.do":
 				Board board3 = new Board();
-				int b_idx3 = Integer.parseInt(request.getParameter("b_idx"));
+				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
 				boardService = BoardService.getInstance();
-				boardService.replyView(b_idx3);
+				boardService.replyView(board3);
 				request.setAttribute("reply", board3);
 				view = "board/reply_view";
 				break;
@@ -238,6 +238,7 @@ public class Controller extends HttpServlet {
 				session = request.getSession();
 				//getAttribute는 기본 object를 가져오기 때문에 우리가 사용하고자 하는 class를 다운 캐스팅하기
 				user2 = (User2)session.getAttribute("user");
+				
 				Board board4 = new Board();
 				board4.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
        	       //	board3.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분

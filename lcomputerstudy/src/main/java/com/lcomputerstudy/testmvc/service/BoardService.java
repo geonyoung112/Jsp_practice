@@ -33,8 +33,8 @@ public class BoardService {
 		dao.delete(b_idx2);
 	}
 	
-	public void replyView(int b_idx3) {
-		dao.replyView(b_idx3);
+	public void replyView(Board board3) {
+		dao.replyView(board3);
 	}
 	
 	public int getBoardsCount() {
@@ -55,7 +55,7 @@ public class BoardService {
 	}
 
 	public void replyAction(Board board4) {
-		dao.modify(board4);
+		dao.replyAction(board4);
 		
 	}
 

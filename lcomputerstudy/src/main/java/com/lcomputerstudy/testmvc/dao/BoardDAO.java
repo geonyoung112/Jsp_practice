@@ -271,7 +271,7 @@ public class BoardDAO {
 	}
 	
 //------------------답글 상세기능 ----------------------
-	public void replyStep(int b_group, int b_order) {
+	public void replyStep(Board board3) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -279,9 +279,9 @@ public class BoardDAO {
 			conn = DBConnection2.getConnection();
 			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_step>?";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, b_group);
-			pstmt.setInt(2, b_order);
-			pstmt.executeQuery();
+			pstmt.setInt(1, board3.getB_group());
+			pstmt.setInt(2, board3.getB_order());
+			pstmt.executeUpdate();
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {
@@ -293,22 +293,24 @@ public class BoardDAO {
 			}
 		}
 	}
-	public void replyView(Board board) {
+	public void replyView(Board board3) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Board board = null;
-		replyStep(b_group, b_order);
-		
 		
 		try {
+			
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
-			pstmt = conn.prepareStatement(query);
-			rs = pstmt.executeQuery();
+		    replyStep(board3);
+		    String query = "INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+		    pstmt = conn.prepareStatement(query);
+		    pstmt.setString(1, board3.getB_title());
+		    pstmt.setInt(2, board3.getUser().getU_idx());
+		    pstmt.setString(3, board3.getB_content());
+		    pstmt.setInt(4, board3.getB_group());
+		    pstmt.setInt(5, board3.getB_order() + 1);
+		    pstmt.setInt(6, board3.getB_depth() + 1);
+		    pstmt.executeUpdate();
 			
-			
-					
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}finally {
@@ -320,6 +322,32 @@ public class BoardDAO {
 				}
 			}
 		}
+
+	public void replyAction(Board board4) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+			
+		try {
+			conn = DBConnection2.getConnection();
+			String query="UPDATE board SET b_title=?, b_content=? WHERE b_idx=?";
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, board4.getB_title());
+			pstmt.setString(2, board4.getB_content());
+			pstmt.setInt(3, board4.getB_idx());
+			pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(pstmt!=null)pstmt.close();
+					if(conn!=null)conn.close();
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		
+	}
 	
 	
 }

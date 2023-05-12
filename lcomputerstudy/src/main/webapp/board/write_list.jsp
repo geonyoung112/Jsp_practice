@@ -93,6 +93,7 @@
 		<td>${brd.b_idx}</td> 
 		<td>${brd.user.u_id}</td> 
 		<td>
+		
 			<%-- 제목이 출력되는 위치 --%>
 			<%-- 1부터 글의 레벨까지 --%>
 			<a href="content-view.do?b_idx=${brd.b_idx}">${brd.b_title}</a>
