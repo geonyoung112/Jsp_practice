@@ -213,3 +213,8 @@ try {
 					.append("LIMIT			?, ?\n")
 					.toString();
 ```
+
+## 오류 10: 답글 기능_getU_idx null 값으로 반환
+```
+
+```
