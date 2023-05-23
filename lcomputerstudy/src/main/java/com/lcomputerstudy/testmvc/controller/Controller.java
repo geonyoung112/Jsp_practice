@@ -226,6 +226,7 @@ public class Controller extends HttpServlet {
 				
 //------------------답글 상세기능 ----------------------			
 			case "/reply_view.do":
+
 				Board board3 = new Board();
 				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
 				boardService = BoardService.getInstance();
@@ -241,9 +242,10 @@ public class Controller extends HttpServlet {
 				
 				Board board4 = new Board();
 				board4.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
-       	       //	board3.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분
+       	       //	board4.getUser().setU_id(request.getParameter("u_id")); // 수정된 부분
 				board4.setB_title(request.getParameter("re_title"));
 				board4.setB_content(request.getParameter("re_content"));
+				board4.setUser(user2);
 				boardService = BoardService.getInstance();
 				boardService.replyAction(board4);
 				request.setAttribute("reply", board4);

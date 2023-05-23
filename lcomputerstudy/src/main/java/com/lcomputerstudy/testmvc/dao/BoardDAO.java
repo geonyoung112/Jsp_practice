@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.lcomputerstudy.testmvc.database.DBConnection2;
 import com.lcomputerstudy.testmvc.vo.Board;
 import com.lcomputerstudy.testmvc.vo.Pagination;
-import com.lcomputerstudy.testmvc.vo.User;
+import com.lcomputerstudy.testmvc.vo.User2;
 public class BoardDAO {
 	
 	private static BoardDAO dao = null;
@@ -82,7 +82,7 @@ public class BoardDAO {
 
 	        while(rs.next()){     
        	       	Board board = new Board();
-       	       	User user = new User();
+       	       	User2 user = new User2();
        	       	user.setU_idx(rs.getInt("u_idx"));
        	       	user.setU_id(rs.getString("u_id"));
        	       	user.setU_name(rs.getString("u_name"));
@@ -194,7 +194,7 @@ public class BoardDAO {
 				board = new Board();
 				board.setB_idx(rs.getInt("b_idx"));
 				
-				User user = new User();
+				User2 user = new User2();
        	       	user.setU_id(rs.getString("u_id"));
        	       	board.setUser(user);
        	       	board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
@@ -271,13 +271,13 @@ public class BoardDAO {
 	}
 	
 //------------------답글 상세기능 ----------------------
-	public void replyStep(Board board3) {
+	public void replyView(Board board3) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_step>?";
+			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_depth>?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, board3.getB_group());
 			pstmt.setInt(2, board3.getB_order());
@@ -293,7 +293,7 @@ public class BoardDAO {
 			}
 		}
 	}
-	public void replyView(Board board3) {
+	public void replyAction(Board board4) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -302,15 +302,15 @@ public class BoardDAO {
 			conn = DBConnection2.getConnection();
 		    String query = "INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 		    pstmt = conn.prepareStatement(query);
-		    pstmt.setString(1, board3.getB_title());
-		    pstmt.setInt(2, board3.getUser().getU_idx());
-		    pstmt.setString(3, board3.getB_content());
-		    pstmt.setInt(4, board3.getB_group());
-		    pstmt.setInt(5, board3.getB_order() + 1);
-		    pstmt.setInt(6, board3.getB_depth() + 1);
+		    pstmt.setString(1, board4.getB_title());
+		    pstmt.setInt(2, board4.getUser().getU_idx());
+		    pstmt.setString(3, board4.getB_content());
+		    pstmt.setInt(4, board4.getB_group());
+		    pstmt.setInt(5, board4.getB_order() + 1);
+		    pstmt.setInt(6, board4.getB_depth() + 1);
 		    pstmt.executeUpdate();
 			
-		    replyStep(board3);
+		    replyView(board4);
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}finally {
@@ -323,31 +323,7 @@ public class BoardDAO {
 			}
 		}
 
-	public void replyAction(Board board4) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-			
-		try {
-			conn = DBConnection2.getConnection();
-			String query="UPDATE board SET b_title=?, b_content=? WHERE b_idx=?";
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1, board4.getB_title());
-			pstmt.setString(2, board4.getB_content());
-			pstmt.setInt(3, board4.getB_idx());
-			pstmt.executeUpdate();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(pstmt!=null)pstmt.close();
-					if(conn!=null)conn.close();
-				}catch(Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		
-	}
+
 	
 	
 }

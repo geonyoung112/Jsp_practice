@@ -13,13 +13,13 @@ public class Board {
 	private int b_group;
 	private int b_order;
 	private int b_depth;
-	private User user;
+	private User2 user;
 	
 	
-	public User getUser() {
+	public User2 getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(User2 user) {
 		this.user = user;
 	}
 	public int getB_idx() {
