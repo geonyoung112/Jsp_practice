@@ -16,4 +16,5 @@
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Boardpagination"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Pagination"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.User2"/>
 </qualifiedTypeNameHistroy>
