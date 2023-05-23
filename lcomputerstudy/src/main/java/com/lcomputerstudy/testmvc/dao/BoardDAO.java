@@ -300,7 +300,6 @@ public class BoardDAO {
 		try {
 			
 			conn = DBConnection2.getConnection();
-		    replyStep(board3);
 		    String query = "INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 		    pstmt = conn.prepareStatement(query);
 		    pstmt.setString(1, board3.getB_title());
@@ -311,6 +310,7 @@ public class BoardDAO {
 		    pstmt.setInt(6, board3.getB_depth() + 1);
 		    pstmt.executeUpdate();
 			
+		    replyStep(board3);
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}finally {
