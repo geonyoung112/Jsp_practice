@@ -216,5 +216,35 @@ try {
 
 ## 오류 10: 답글 기능_getU_idx null 값으로 반환
 ```
+session = request.getSession();
+user2 = (User2)session.getAttribute("user");
 
+Board board4 = new Board();
+board4.setU_idx(user2.getU_idx());
+```
+## 오류 11: 답글 기능_getParameter 받아오기
+```
+controller 
+
+case "/reply_view.do":
+
+				Board board3 = new Board();
+				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
+				board3.setB_group(Integer.parseInt(request.getParameter("b_group")));
+				board3.setB_order(Integer.parseInt(request.getParameter("b_order")));
+				board3.setB_depth(Integer.parseInt(request.getParameter("b_depth")));
+				boardService = BoardService.getInstance();
+				//boardService.replyView(board3);
+				request.setAttribute("reply", board3);
+				view = "board/reply_view";
+				break;
+
+content_view.jsp에서 group, order, depth 파라미터 받아오기
+
+<div>
+					<input type="submit" value="수정">&nbsp;&nbsp;
+					<a href="write-list.do">목록보기</a>&nbsp;&nbsp;
+					<a href="write-delete.do?b_idx=${content.b_idx}">삭제</a>&nbsp;&nbsp;
+					<a href="reply_view.do?b_group=${content.b_group}&b_order=${content.b_order}&b_depth=${content.b_depth}">답변</a>
+</div>
 ```
