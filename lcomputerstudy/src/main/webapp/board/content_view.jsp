@@ -80,7 +80,7 @@
 					<input type="submit" value="수정">&nbsp;&nbsp;
 					<a href="write-list.do">목록보기</a>&nbsp;&nbsp;
 					<a href="write-delete.do?b_idx=${content.b_idx}">삭제</a>&nbsp;&nbsp;
-					<a href="reply_view.do?b_idx=${content.b_idx}">답변</a>
+					<a href="reply_view.do?b_group=${content.b_group}&b_order=${content.b_order}&b_depth=${content.b_depth}">답변</a>
 			</div>
 	</form>
 

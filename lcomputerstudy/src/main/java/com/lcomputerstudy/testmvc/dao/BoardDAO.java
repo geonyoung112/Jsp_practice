@@ -72,7 +72,7 @@ public class BoardDAO {
 					.append("FROM 			board b\n")
 					.append("LEFT JOIN user u ON b.u_idx = u.u_idx\n")
 					.append("LIMIT			?, ?\n")
-					//.append("ORDER BY 		b.b_group DESC, b.b_order DESC, b.b_depth DESC\n")
+					//.append("ORDER BY 		b.b_group DESC, b.b_order DESC \n")
 					.toString();
 	       	pstmt = conn.prepareStatement(query);
 	       	pstmt.setInt(1, pageNum);
@@ -271,13 +271,13 @@ public class BoardDAO {
 	}
 	
 //------------------답글 상세기능 ----------------------
-	public void replyView(Board board3) {
+	/**public void replyView(Board board3) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = DBConnection2.getConnection();
-			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_depth>?";
+			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, board3.getB_group());
 			pstmt.setInt(2, board3.getB_order());
@@ -292,25 +292,30 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-	}
+	}**/
+	
 	public void replyAction(Board board4) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			
 			conn = DBConnection2.getConnection();
 		    String query = "INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 		    pstmt = conn.prepareStatement(query);
 		    pstmt.setString(1, board4.getB_title());
-		    pstmt.setInt(2, board4.getUser().getU_idx());
+		    pstmt.setInt(2, board4.getU_idx());
 		    pstmt.setString(3, board4.getB_content());
 		    pstmt.setInt(4, board4.getB_group());
-		    pstmt.setInt(5, board4.getB_order() + 1);
-		    pstmt.setInt(6, board4.getB_depth() + 1);
+		    pstmt.setInt(5, board4.getB_order()+1);
+		    pstmt.setInt(6, board4.getB_depth()+1);
 		    pstmt.executeUpdate();
-			
-		    replyView(board4);
+		    //pstmt.close();
+			//replyView(board4);
+
+			/**query= "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.executeUpdate();**/
+		    
 			}catch(Exception ex) {
 				ex.printStackTrace();
 			}finally {

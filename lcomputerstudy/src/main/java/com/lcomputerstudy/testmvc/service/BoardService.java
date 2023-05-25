@@ -33,9 +33,9 @@ public class BoardService {
 		dao.delete(b_idx2);
 	}
 	
-	public void replyView(Board board3) {
+	/**public void replyView(Board board3) {
 		dao.replyView(board3);
-	}
+	}**/
 	
 	public int getBoardsCount() {
 		return dao.getBoardsCount();
