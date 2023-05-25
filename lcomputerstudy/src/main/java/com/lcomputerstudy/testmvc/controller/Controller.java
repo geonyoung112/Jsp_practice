@@ -224,7 +224,8 @@ public class Controller extends HttpServlet {
 				view = "board/delete";
 				break;
 				
-//------------------답글 상세기능 ----------------------			
+//------------------답글 상세기능 ----------------------	
+// group, order, depth 파라미터 넘어가지 않음: content에 넘겨보고 안되면 물어보기
 			case "/reply_view.do":
 
 				Board board3 = new Board();
