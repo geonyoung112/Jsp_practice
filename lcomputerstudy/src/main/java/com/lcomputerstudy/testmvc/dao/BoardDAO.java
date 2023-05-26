@@ -283,13 +283,13 @@ public class BoardDAO {
 		    pstmt.setInt(5, board4.getB_order()+1);
 		    pstmt.setInt(6, board4.getB_depth()+1);
 		    pstmt.executeUpdate();
-		    //pstmt.close();
+		    pstmt.close();
 
-			/**query= "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
+			query= "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, board4.getB_group());
             pstmt.setInt(2, board4.getB_order());
-			pstmt.executeUpdate();**/
+			pstmt.executeUpdate();
 		    
 			}catch(Exception ex) {
 				ex.printStackTrace();
