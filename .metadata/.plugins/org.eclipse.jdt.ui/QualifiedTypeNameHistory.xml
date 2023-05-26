@@ -11,10 +11,10 @@
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc3.vo.Board"/>
     <fullyQualifiedTypeName name="java.security.Timestamp"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.User"/>
-    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.dao.BoardDAO"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Boardpagination"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Pagination"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.User2"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 </qualifiedTypeNameHistroy>
