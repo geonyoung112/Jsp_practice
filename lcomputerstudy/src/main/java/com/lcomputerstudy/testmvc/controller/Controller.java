@@ -225,11 +225,9 @@ public class Controller extends HttpServlet {
 				break;
 				
 //------------------답글 상세기능 ----------------------	
-// group, order, depth 파라미터 넘어가지 않음: content에 넘겨보고 안되면 물어보기
 			case "/reply_view.do":
 
 				Board board3 = new Board();
-				board3.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
 				board3.setB_group(Integer.parseInt(request.getParameter("b_group")));
 				board3.setB_order(Integer.parseInt(request.getParameter("b_order")));
 				board3.setB_depth(Integer.parseInt(request.getParameter("b_depth")));

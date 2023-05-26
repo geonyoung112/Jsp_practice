@@ -29,14 +29,11 @@ public class BoardDAO {
 
 		try {
 			conn = DBConnection2.getConnection();
-			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+			String query="INSERT INTO board(b_title, u_idx, b_content, b_date, b_group, b_order, b_depth) VALUES (?, ?, ?, NOW(), 0, 1, 0)";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getB_title());
 			pstmt.setInt(2, board.getU_idx());
 			pstmt.setString(3, board.getB_content());
-			pstmt.setInt(4, board.getB_group());
-			pstmt.setInt(5, board.getB_order());
-			pstmt.setInt(6, board.getB_depth());
 			pstmt.executeUpdate();
 			pstmt.close();
 			//새글 작성해보기
@@ -71,8 +68,8 @@ public class BoardDAO {
 					.append("SELECT 		b.*, u.*\n")
 					.append("FROM 			board b\n")
 					.append("LEFT JOIN user u ON b.u_idx = u.u_idx\n")
+					.append("ORDER BY 		b.b_group DESC, b.b_order ASC\n")
 					.append("LIMIT			?, ?\n")
-					//.append("ORDER BY 		b.b_group DESC, b.b_order DESC \n")
 					.toString();
 	       	pstmt = conn.prepareStatement(query);
 	       	pstmt.setInt(1, pageNum);
@@ -197,7 +194,6 @@ public class BoardDAO {
 				User2 user = new User2();
        	       	user.setU_id(rs.getString("u_id"));
        	       	board.setUser(user);
-       	       	board.getUser().setU_id(rs.getString("u_id")); // 수정된 부분
        	       	
        	       	board.setB_title(rs.getString("b_title"));
        	       	board.setB_content(rs.getString("b_content"));
@@ -271,28 +267,6 @@ public class BoardDAO {
 	}
 	
 //------------------답글 상세기능 ----------------------
-	/**public void replyView(Board board3) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = DBConnection2.getConnection();
-			String query = "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, board3.getB_group());
-			pstmt.setInt(2, board3.getB_order());
-			pstmt.executeUpdate();
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}**/
 	
 	public void replyAction(Board board4) {
 		Connection conn = null;
@@ -310,10 +284,11 @@ public class BoardDAO {
 		    pstmt.setInt(6, board4.getB_depth()+1);
 		    pstmt.executeUpdate();
 		    //pstmt.close();
-			//replyView(board4);
 
 			/**query= "UPDATE board SET b_order=b_order+1 WHERE b_group=? and b_order>?";
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board4.getB_group());
+            pstmt.setInt(2, board4.getB_order());
 			pstmt.executeUpdate();**/
 		    
 			}catch(Exception ex) {
