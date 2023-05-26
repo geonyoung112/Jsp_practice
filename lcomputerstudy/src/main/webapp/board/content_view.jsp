@@ -83,6 +83,16 @@
 					<a href="reply_view.do?b_group=${content.b_group}&b_order=${content.b_order}&b_depth=${content.b_depth}">답변</a>
 			</div>
 	</form>
+<!-- 댓글 기능을 하는 테이블 따로 만들기 -->
+
+
+
+
+
+<!-- 댓글 목록을 보이게 하는 테이블 따로 만들기 -->
+
+
+
 
 </body>
 </html>

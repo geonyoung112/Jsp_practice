@@ -254,7 +254,9 @@ public class Controller extends HttpServlet {
 				request.setAttribute("reply", board4);
 				view = "board/reply_action";
 				break;
-			
+				
+				
+//------------------댓글 상세기능 ----------------------	
 	
 				
 
