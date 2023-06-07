@@ -17,4 +17,5 @@
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.User2"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="com.lcomputerstudy.testmvc.vo.Reply"/>
 </qualifiedTypeNameHistroy>
