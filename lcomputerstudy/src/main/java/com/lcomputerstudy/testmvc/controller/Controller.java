@@ -258,11 +258,11 @@ public class Controller extends HttpServlet {
 				
 				
 //------------------댓글 상세기능 ----------------------	
-			case "/reply-view.do":
+			case "/rereply_view.do":
 				Reply reply = new Reply();
 				int re_idx = Integer.parseInt(request.getParameter("b_idx"));
 				boardService = BoardService.getInstance();
-			    reply = boardService.replyView(re_idx);
+			    reply = boardService.rereplyView(re_idx);
 			    request.setAttribute("reply", reply);
 				view = "board/content_view";
 				break;

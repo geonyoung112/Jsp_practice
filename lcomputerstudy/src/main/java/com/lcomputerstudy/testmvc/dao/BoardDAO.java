@@ -304,7 +304,8 @@ public class BoardDAO {
 			}
 		}
 
-	public Reply replyview(int re_idx) {
+//---------------댓글 조회-------------------
+	public Reply rereplyview(int re_idx) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -346,7 +347,7 @@ public class BoardDAO {
 		return reply; 
 	}
 	
-//------------------댓글 상세기능 ----------------------
+//------------------댓글 수정 기능 ----------------------
 
 	
 	
