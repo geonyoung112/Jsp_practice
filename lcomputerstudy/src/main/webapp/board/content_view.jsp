@@ -58,6 +58,9 @@
 				<td><input type="hidden" name="b_idx" value="${content.b_idx}">${content.b_idx}</td>
 			</tr>
 			<tr>
+			
+			
+			
 				<td>조회수</td>
 				<td>${content.b_readcount}</td>
 			</tr>
@@ -84,6 +87,35 @@
 			</div>
 	</form>
 <!-- 댓글 기능을 하는 테이블 따로 만들기 -->
+<ul>
+    <c:forEach items="${reply}" var="reply">
+    <li>
+    	<div>
+    		<p>${reply.user.u_id} /<fmt:formatDate value="${reply.regDate}" pattern="yyyy-MM-dd" /></p>
+    		<p>${reply.re_contetn}</p>
+    	</div>
+    </li>
+    </c:forEach>
+</ul>
+
+<div>
+
+    <form method="post" action="reply-view">
+    
+        <p>
+            <label>댓글 작성자</label> <input type="text" name="writer">
+        </p>
+        <p>
+            <textarea rows="5" cols="50" name="content"></textarea>
+        </p>
+        <p>
+        	<input type="hidden" name="bno" value="${view.b_idx}">
+            <button type="submit">댓글 작성</button>
+        </p>
+    </form>
+
+</div>
+
 
 
 

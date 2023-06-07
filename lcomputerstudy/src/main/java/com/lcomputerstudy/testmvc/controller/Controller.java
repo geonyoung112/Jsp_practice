@@ -257,7 +257,13 @@ public class Controller extends HttpServlet {
 				
 				
 //------------------댓글 상세기능 ----------------------	
-	
+			case "/reply-view.do":
+				int b_idx5 = Integer.parseInt(request.getParameter("b_idx"));
+				boardService = BoardService.getInstance();
+			    board = boardService.contentView(b_idx5);
+			    request.setAttribute("reply", board);
+				view = "board/content_view";
+				break;
 				
 
 		}
