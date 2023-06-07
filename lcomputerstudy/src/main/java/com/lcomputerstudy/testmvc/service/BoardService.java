@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.lcomputerstudy.testmvc.dao.BoardDAO;
 import com.lcomputerstudy.testmvc.vo.Board;
 import com.lcomputerstudy.testmvc.vo.Pagination;
+import com.lcomputerstudy.testmvc.vo.Reply;
 
 public class BoardService {
 
@@ -57,6 +58,11 @@ public class BoardService {
 	public void replyAction(Board board4) {
 		dao.replyAction(board4);
 		
+	}
+
+	public Reply replyView(int re_idx) {
+		// TODO Auto-generated method stub
+		return dao.replyview(re_idx);
 	}
 
 

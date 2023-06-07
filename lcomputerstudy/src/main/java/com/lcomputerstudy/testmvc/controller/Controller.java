@@ -14,6 +14,7 @@ import com.lcomputerstudy.testmvc.service.BoardService;
 import com.lcomputerstudy.testmvc.service.UserService2;
 import com.lcomputerstudy.testmvc.vo.Board;
 import com.lcomputerstudy.testmvc.vo.Pagination;
+import com.lcomputerstudy.testmvc.vo.Reply;
 import com.lcomputerstudy.testmvc.vo.User2;
 
 @WebServlet("*.do")
@@ -258,10 +259,11 @@ public class Controller extends HttpServlet {
 				
 //------------------댓글 상세기능 ----------------------	
 			case "/reply-view.do":
-				int b_idx5 = Integer.parseInt(request.getParameter("b_idx"));
+				Reply reply = new Reply();
+				int re_idx = Integer.parseInt(request.getParameter("b_idx"));
 				boardService = BoardService.getInstance();
-			    board = boardService.contentView(b_idx5);
-			    request.setAttribute("reply", board);
+			    reply = boardService.replyView(re_idx);
+			    request.setAttribute("reply", reply);
 				view = "board/content_view";
 				break;
 				

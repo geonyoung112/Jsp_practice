@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.lcomputerstudy.testmvc.database.DBConnection2;
 import com.lcomputerstudy.testmvc.vo.Board;
 import com.lcomputerstudy.testmvc.vo.Pagination;
+import com.lcomputerstudy.testmvc.vo.Reply;
 import com.lcomputerstudy.testmvc.vo.User2;
 public class BoardDAO {
 	
@@ -302,9 +303,52 @@ public class BoardDAO {
 				}
 			}
 		}
+
+	public Reply replyview(int re_idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Reply reply = null;
+		
+		try {
+			conn =  DBConnection2.getConnection();
+			String query = "SELECT * FROM reply r LEFT JOIN board b ON r.b_idx = b.b_idx LEFT JOIN user u ON r.u_idx = u.u_idx WHERE r.re_idx = ? ";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, re_idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				reply = new Reply();
+				Board board = new Board();
+				board.setB_idx(rs.getInt("b_idx"));
+				reply.setBoard(board);
+				
+				User2 user = new User2();
+       	       	user.setU_id(rs.getString("u_id"));
+       	       	reply.setUser(user);
+       	       	
+       	       	reply.setRe_idx(rs.getInt("re_idx"));
+       	       	reply.setRe_content(rs.getString("re_content"));
+       	       	reply.setRe_date(rs.getTimestamp("re_date"));
+       	       
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return reply; 
+	}
 	
 //------------------댓글 상세기능 ----------------------
 
 	
 	
 }
+
