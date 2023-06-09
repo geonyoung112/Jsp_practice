@@ -60,9 +60,9 @@ public class BoardService {
 		
 	}
 
-	public Reply rereplyView(int re_idx) {
+	public Reply rereplyView(Reply reply) {
 		// TODO Auto-generated method stub
-		return dao.rereplyview(re_idx);
+		return dao.rereplyview(reply);
 	}
 
 

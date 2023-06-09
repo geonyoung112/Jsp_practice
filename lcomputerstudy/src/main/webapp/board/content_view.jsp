@@ -87,41 +87,35 @@
 			</div>
 	</form>
 <!-- 댓글 기능을 하는 테이블 따로 만들기 -->
-<ul>
-    <c:forEach items="${reply}" var="reply">
-    <li>
-    	<div>
-    		<p>${reply.user.u_id} /<fmt:formatDate value="${reply.regDate}" pattern="yyyy-MM-dd" /></p>
-    		<p>${reply.re_contetn}</p>
-    	</div>
-    </li>
-    </c:forEach>
-</ul>
 
-<div>
-
-    <form method="post" action="reply-view">
-    
-        <p>
-            <label>댓글 작성자</label> <input type="text" name="writer">
-        </p>
-        <p>
-            <textarea rows="5" cols="50" name="content"></textarea>
-        </p>
-        <p>
-        	<input type="hidden" name="bno" value="${view.b_idx}">
-            <button type="submit">댓글 작성</button>
-        </p>
+	<h1>댓글 작성</h1>
+		<form action="rereply_view.do" name= "reply" method="post">
+		<table style ="width:800px;">
+	        <tr>
+	            <td>댓글 작성자</td>
+	            <td><input type="text" name="u_idx" value ="${reply.user.u_id}" readonly></td>
+	        </tr>
+	        <tr>
+	        	<td>댓글 내용</td>
+	            <td><textarea rows="5" cols="50" name="content">${reply.re_content}</textarea></td>
+	        </tr>       
+	      </table>
+	      
+	       <div>
+	        	<input type="hidden" name="bno" value="${reply.b_idx}"> &nbsp;&nbsp;
+	            <a href="rereply_view.do">댓글 등록</a>
+	        </div>
+        
+	<h1>댓글 목록</h1> 
+			<div>
+					<p><input type="hidden" name="rno" value="${reply.re_idx}"></p>
+					<p>${reply.user.u_id}/<fmt:formatDate value="${reply.re_date}" pattern="yyyy-MM-dd" /></p>
+					<p>${reply.re_content}</p>
+			</div>
     </form>
 
-</div>
 
 
-
-
-
-
-<!-- 댓글 목록을 보이게 하는 테이블 따로 만들기 -->
 
 
 

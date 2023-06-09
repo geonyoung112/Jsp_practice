@@ -259,10 +259,15 @@ public class Controller extends HttpServlet {
 				
 //------------------댓글 상세기능 ----------------------	
 			case "/rereply_view.do":
+				session = request.getSession();
+				user2 = (User2)session.getAttribute("user");
 				Reply reply = new Reply();
-				int re_idx = Integer.parseInt(request.getParameter("b_idx"));
+				reply.setRe_idx(Integer.parseInt(request.getParameter("re_idx")));
+				reply.setU_idx(user2.getU_idx());
+				reply.setRe_content(request.getParameter("re_content"));
+				reply.setB_idx(Integer.parseInt(request.getParameter("b_idx")));
 				boardService = BoardService.getInstance();
-			    reply = boardService.rereplyView(re_idx);
+			    boardService.rereplyView(reply);
 			    request.setAttribute("reply", reply);
 				view = "board/content_view";
 				break;

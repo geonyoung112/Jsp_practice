@@ -305,34 +305,21 @@ public class BoardDAO {
 		}
 
 //---------------댓글 조회-------------------
-	public Reply rereplyview(int re_idx) {
+	public Reply rereplyview(Reply reply) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Reply reply = null;
 		
 		try {
 			conn =  DBConnection2.getConnection();
-			String query = "SELECT * FROM reply r LEFT JOIN board b ON r.b_idx = b.b_idx LEFT JOIN user u ON r.u_idx = u.u_idx WHERE r.re_idx = ? ";
+			String query = "INSERT INTO reply(re_idx, u_idx, re_content, re_date, b_idx) VALUES (?, ?, ?. NOW(),?)";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, re_idx);
+			pstmt.setInt(1, reply.getRe_idx());
+			pstmt.setInt(2, reply.getU_idx());
+			pstmt.setString(3, reply.getRe_content());
+			pstmt.setInt(4, reply.getB_idx());
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				reply = new Reply();
-				Board board = new Board();
-				board.setB_idx(rs.getInt("b_idx"));
-				reply.setBoard(board);
-				
-				User2 user = new User2();
-       	       	user.setU_id(rs.getString("u_id"));
-       	       	reply.setUser(user);
-       	       	
-       	       	reply.setRe_idx(rs.getInt("re_idx"));
-       	       	reply.setRe_content(rs.getString("re_content"));
-       	       	reply.setRe_date(rs.getTimestamp("re_date"));
        	       
-			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {
