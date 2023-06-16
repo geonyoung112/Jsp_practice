@@ -130,7 +130,7 @@ public class UserDAO2 {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		User2 user = null;
+		User2 user2 = null;
 
 		try {
 			conn = DBConnection2.getConnection();
@@ -140,14 +140,14 @@ public class UserDAO2 {
 			rs = pstmt.executeQuery();
 				
 			while(rs.next()) {
-				user = new User2();
-				user.setU_idx(rs.getInt("u_idx"));
-		   	    user.setU_id(rs.getString("u_id"));
-		   	    user.setU_pw(rs.getString("u_pw"));
-		   	    user.setU_name(rs.getString("u_name"));
-		        user.setU_tel(rs.getString("u_tel"));
-       	       	user.setU_tels(user.getU_tel().split("-"));
-		   	    user.setU_age(rs.getString("u_age"));
+				user2 = new User2();
+				user2.setU_idx(rs.getInt("u_idx"));
+		   	    user2.setU_id(rs.getString("u_id"));
+		   	    user2.setU_pw(rs.getString("u_pw"));
+		   	    user2.setU_name(rs.getString("u_name"));
+		        user2.setU_tel(rs.getString("u_tel"));
+       	       	user2.setU_tels(user2.getU_tel().split("-"));
+		   	    user2.setU_age(rs.getString("u_age"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -162,7 +162,7 @@ public class UserDAO2 {
 				}
 			}
 				
-			return user;
+			return user2;
 		}
 	
 	
@@ -262,7 +262,7 @@ public class UserDAO2 {
     	Connection conn = null;
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
-    	User2 user = null;
+    	User2 user2 = null;
     	
     	try {
 			conn = DBConnection2.getConnection();
@@ -273,11 +273,11 @@ public class UserDAO2 {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){     
-				user = new User2();
-				user.setU_idx(rs.getInt("u_idx"));
-	        	user.setU_pw(rs.getString("u_pw"));
-	        	user.setU_id(rs.getString("u_id"));
-	        	user.setU_name(rs.getString("u_name"));
+				user2 = new User2();
+				user2.setU_idx(rs.getInt("u_idx"));
+	        	user2.setU_pw(rs.getString("u_pw"));
+	        	user2.setU_id(rs.getString("u_id"));
+	        	user2.setU_name(rs.getString("u_name"));
 		   }
 		} catch( Exception e) {
 			e.printStackTrace();
@@ -289,7 +289,7 @@ public class UserDAO2 {
 				e.printStackTrace();
 			}
 		}
-		return user;
+		return user2;
 	} 
 
 }
